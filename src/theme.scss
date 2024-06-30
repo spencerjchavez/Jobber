@@ -1,6 +1,23 @@
-/* font sizing */
-$text-size-multiplier: 1;
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&Roboto+Slab:wght@100..900&display=swap');
+/* color variables */
+$color-primary: #f15a24;
+$color-secondary: black;
 
+/* font variables */
+$text-size-multiplier: 1;
+$color-header: #404040;
+$color-body: #202020;
+
+/* fonts */
+body {
+	font-family: 'Lato', sans-serif;
+	color: $color-body;
+}
+h1, h2, h3 {
+	font-family: 'Roboto Slab';
+	font-weight: 600;
+	color: $color-header;
+}
 .display-1 {
     font-size: 4.5em * $text-size-multiplier;
 }
@@ -92,4 +109,18 @@ p.lead{
 svg {
 	width: 100%;
 	height: 100%;
+}
+
+/* container styles */
+.bg-color-primary {
+	background-color: $color-primary;
+}
+.bg-color-secondary {
+	background-color: $color-secondary;
+}
+.dark, .dark * {
+	color: white;
+}
+.light, .light * {
+	color: $color-body;
 }
