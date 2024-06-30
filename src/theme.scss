@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&Roboto+Slab:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 /* color variables */
 $color-primary: #f15a24;
 $color-secondary: black;
@@ -16,8 +18,7 @@ body {
 	color: $color-body;
 }
 h1, h2, h3, h4 {
-	font-family: 'Roboto Slab';
-	font-weight: 600;
+	font-family: 'Roboto';
 	color: $color-header;
 }
 .display-1 {
@@ -43,35 +44,40 @@ h1, h2, h3, h4 {
 }
 
 h1{
-	font-size: 2.5em  * $text-size-multiplier;
+	font-size: 67.77px  * $text-size-multiplier;
 }
 
 h2{
-	font-size: 2.1em * $text-size-multiplier;
+	font-size: 41.89px * $text-size-multiplier;
+	font-weight: 900;
+	letter-spacing: 2px;
 }
 
 h3{
-	font-size: 1.7em * $text-size-multiplier;
+	font-size: 25.89px * $text-size-multiplier;
+	font-weight: 500;
 }
 
 h4{
-	font-size: 1.618em * $text-size-multiplier;
+	font-size: 16px * $text-size-multiplier;
+	font-weight: 400;
 }
 
-h5{
-	font-size: 1.618em * $text-size-multiplier;
+h5, h6{
+	//TODO: alt-font. something thin perhaps?
+	font-size: 16px * $text-size-multiplier;
+	font-weight: 300;
 }
 
-h6{
-	font-size: 1em * $text-size-multiplier;
+p {
+	font-size: 16px * $text-size-multiplier;
 }
-
 p.lead{
-	font-size: 1.2em * $text-size-multiplier;
+	font-size: 25.89px * $text-size-multiplier;
 }
 
 .small{
-	font-size: .7em * $text-size-multiplier;
+	font-size: 11px * $text-size-multiplier;
 }
 
 a {
