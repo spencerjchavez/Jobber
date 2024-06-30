@@ -2,9 +2,11 @@
 /* color variables */
 $color-primary: #f15a24;
 $color-secondary: black;
+$color-offwhite: rgb(243, 243, 243);
+$color-offwhite-darker: rgb(230, 230, 230);
 
 /* font variables */
-$text-size-multiplier: 1;
+$text-size-multiplier: .9;
 $color-header: #404040;
 $color-body: #202020;
 
@@ -13,7 +15,7 @@ body {
 	font-family: 'Lato', sans-serif;
 	color: $color-body;
 }
-h1, h2, h3 {
+h1, h2, h3, h4 {
 	font-family: 'Roboto Slab';
 	font-weight: 600;
 	color: $color-header;
@@ -53,11 +55,11 @@ h3{
 }
 
 h4{
-	font-size: 1.4em * $text-size-multiplier;
+	font-size: 1.618em * $text-size-multiplier;
 }
 
 h5{
-	font-size: 1.2em * $text-size-multiplier;
+	font-size: 1.618em * $text-size-multiplier;
 }
 
 h6{
@@ -69,7 +71,11 @@ p.lead{
 }
 
 .small{
-	font-size: .9em * $text-size-multiplier;
+	font-size: .7em * $text-size-multiplier;
+}
+
+a {
+	border-bottom: 1px solid $color-offwhite-darker;
 }
 
 
@@ -87,22 +93,6 @@ p.lead{
 /* mobile / tablet styles */
 @media only screen and (max-width: 991px) {
 
-
-    .display-1 {
-		font-size: 3em * $text-size-multiplier;
-	}
-
-	.display-2 {
-		font-size: 2.5em * $text-size-multiplier;
-	}
-
-	.display-3 {
-		font-size: 2.3em * $text-size-multiplier;
-	}
-
-	.display-4{
-		font-size: 2em * $text-size-multiplier;
-	}
 }
 
 /* icons */
