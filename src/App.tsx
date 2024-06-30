@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+import JobPost from './features/job-postings/JobPost'
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
+  return (<>
     <h1>This is an app</h1>
-  )
+    <JobPost />
+  </>)
 }
 
 export default App
