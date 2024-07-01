@@ -6,11 +6,12 @@ import JobPost from './JobPost';
 const JobPostingsContainer: React.FC = () => {
 
     //let jobPostProps: Map<number, JobPostProps> = new Map();
-    let jobPostProps: JobPostProps[] = [];
+    const jobPostProps: JobPostProps[] = [];
 
     for(let i = 0; i < 8; i++) {
       jobPostProps.push({
         jobPostId: i,
+        postDate: new Date(),
         authorName: 'Jon Doe',
         authorId: 1,
         profilePictureURL: 'https://mediaproxy.salon.com/width/1200/https://media2.salon.com/2013/06/chris_hayes.jpg',
@@ -28,12 +29,12 @@ const JobPostingsContainer: React.FC = () => {
             {
                 // if there is a job selected, display the job, otherwise display the feed of jobs
                 selectedJobIndex === null 
-                ? jobPostProps.map((props) => {
-                    return <JobPostListItem key={props.jobPostId} {...props} />
+                ? jobPostProps.map((props, jobIndex) => {
+                    return <JobPostListItem key={props.jobPostId} {...props} onClick={() => setSelectedJobIndex(jobIndex)}/>
                 })
-                : <JobPost {...jobPostProps[selectedJobIndex]} />
+                : <JobPost {...jobPostProps[selectedJobIndex]} onClick={() => setSelectedJobIndex(null)}/>
             }
-        </div>h
+        </div>
     </div>
 }
 

@@ -101,12 +101,6 @@ a {
 
 }
 
-/* icons */
-svg {
-	width: 100%;
-	height: 100%;
-}
-
 /* container styles */
 .bg-color-primary {
 	background-color: $color-primary;
@@ -119,4 +113,16 @@ svg {
 }
 .light, .light * {
 	color: $color-body;
+}
+
+/* icons */
+svg {
+	width: 100%;
+	height: 100%;
+}
+
+// buttons
+// TODO: do button styles
+.btn-icon-left {
+	
 }

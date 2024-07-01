@@ -4,3 +4,8 @@
     border: 1px solid $color-offwhite-darker;
     margin-bottom: 20px;
 }
+
+.job-post-list-item-container:hover {
+    cursor: pointer;
+    background-color: $color-offwhite;
+}

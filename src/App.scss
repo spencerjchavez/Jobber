@@ -1,0 +1,14 @@
+@import './theme.scss';
+
+html::-webkit-scrollbar {
+  //display: none;
+}
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+html {
+  overflow-y: scroll;
+  //-ms-overflow-style: none;  /* IE and Edge */
+  //scrollbar-width: none;  /* Firefox */
+}
+
+//custom scroll bar
