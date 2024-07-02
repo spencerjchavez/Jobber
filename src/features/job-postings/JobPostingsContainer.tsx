@@ -5,7 +5,6 @@ import JobPost from './JobPost';
 
 const JobPostingsContainer: React.FC = () => {
 
-    //let jobPostProps: Map<number, JobPostProps> = new Map();
     const jobPostProps: JobPostProps[] = [];
 
     for(let i = 0; i < 8; i++) {
@@ -16,7 +15,7 @@ const JobPostingsContainer: React.FC = () => {
         authorId: 1,
         profilePictureURL: 'https://mediaproxy.salon.com/width/1200/https://media2.salon.com/2013/06/chris_hayes.jpg',
         category: 'Construction',
-        title: 'AC Repair',
+        title: 'AC Repair Needed on my cental AC',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         images: []
       });
