@@ -1,4 +1,5 @@
 import JobPostingsContainer from './features/job-postings/JobPostingsContainer';
+import MainContainer from './components/MainContainer';
 import './App.scss'
 
 function App() {
@@ -9,17 +10,17 @@ function App() {
         <h2 className="m-0">JOBBER</h2>
       </div>
     </div>
-    <div className="row content">
-      <div className="col-lg-3 col-12 bg-color-offwhite p-5">
+    {/* Insert route countainer here */}
+    <MainContainer sidebarLeft = {
+      <>
         <h3>Types of Work</h3>
         <ul>
           
         </ul>
-      </div>
-      <div className="col-lg-9 col-12 p-5">
-        <JobPostingsContainer />
-      </div>
-    </div>
+      </>
+    } mainContent = {
+      <JobPostingsContainer />
+    } />
   </div>)
 }
 

@@ -132,8 +132,13 @@ svg {
 // buttons
 button {
 	cursor: pointer;
+	position: relative;
 	font-weight: 600;
 	font-size: 16px * $text-size-multiplier;
+	color: $color-header;
+}
+button:hover {
+	color: black;
 }
 
 .btn-simple {
@@ -143,15 +148,36 @@ button {
 	margin: 0 0 1em 0;
 }
 
-.btn-arrow-left {
+@mixin absolute-position-center-y($additional-transform: null) {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%) #{$additional-transform};
+}
 
+.btn-arrow-left {
 	&::before {
-		content: "\2190";
+		content: "<";
+		@include absolute-position-center-y(translateX(-100%));
+		left: 0px;
+		padding-right: 5px;
 		transition: margin .5s;
 	}
 
 	&:hover::before {
-		margin-left: -3px;
+		margin-left: -4px;
 	}
-	
+}
+
+.btn-arrow-right {
+	&::after {
+		content: ">";
+		@include absolute-position-center-y(translateX(100%));
+		right: 0px;
+		padding-left: 5px;
+		transition: margin .5s;
+	}
+
+	&:hover::after {
+		margin-right: -4px;
+	}
 }

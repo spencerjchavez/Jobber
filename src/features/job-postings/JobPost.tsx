@@ -1,3 +1,4 @@
+import { Button } from "antd";
 import React from "react";
 import JobPostProps from "src/global-types/JobPostProps";
 
@@ -21,15 +22,14 @@ const JobPost: React.FC<JobPostComponentProps> = (props: JobPostComponentProps) 
                     <p>{props.description}</p>
                 </div>
                 { 
-                props.images
-                ? <div className="col-12">
-                    <h4>Project Images:</h4>
-                    {props.images.map((imageURL) => {
-                        return <img className="img-fluid" src={imageURL} />
-                    })}
-                </div>
-                : null
+                    props.images.length > 0 && <div className="col-12">
+                        <h4>Project Images:</h4>
+                        {props.images.map((imageURL) => {
+                            return <img className="img-fluid" src={imageURL} />
+                        })}
+                    </div>
                 }
+                
             </div>
         </div>
     </div>
