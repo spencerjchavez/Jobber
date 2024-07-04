@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import JobPostListItem from './JobPostListItem';
 import JobPostProps from 'src/global-types/JobPostProps';
 import JobPost from './JobPost';
+import MainContainer from "src/components/MainContainer";
 
 const JobPostingsContainer: React.FC = () => {
-
     const jobPostProps: JobPostProps[] = [];
-
     for(let i = 0; i < 8; i++) {
       jobPostProps.push({
         jobPostId: i,
@@ -21,17 +20,17 @@ const JobPostingsContainer: React.FC = () => {
       });
     }
 
-    const [selectedJobIndex, setSelectedJobIndex] = useState<number | null>(null);
-
     return <div className="row">
         <div className="col-12">
-            {
-                // if there is a job selected, display the job, otherwise display the feed of jobs
-                selectedJobIndex === null 
-                ? jobPostProps.map((props, jobIndex) => {
-                    return <JobPostListItem key={props.jobPostId} {...props} onClick={() => setSelectedJobIndex(jobIndex)}/>
-                })
-                : <JobPost {...jobPostProps[selectedJobIndex]} onClick={() => setSelectedJobIndex(null)}/>
+            { <MainContainer 
+                sidebarLeft={<>
+                    <h3>Sidebar Left</h3>
+                </>}
+                mainContent={
+                    jobPostProps.map((props) => {
+                        return <JobPostListItem key={props.jobPostId} {...props}/>
+                    })
+                } />
             }
         </div>
     </div>

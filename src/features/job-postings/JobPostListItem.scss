@@ -1,11 +1,11 @@
 @import 'src/theme';
 
-.job-post-list-item-container {
+.job-post-list-item {
     border: 1px solid $color-offwhite-darker;
     margin-bottom: 20px;
 }
 
-.job-post-list-item-container:hover {
+.job-post-list-item:hover {
     cursor: pointer;
     background-color: $color-offwhite;
 }

@@ -1,14 +1,13 @@
 import { Button } from "antd";
-import React from "react";
-import JobPostProps from "src/global-types/JobPostProps";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
-interface JobPostComponentProps extends JobPostProps {
-    onClick: () => void
-}
-
-const JobPost: React.FC<JobPostComponentProps> = (props: JobPostComponentProps) => {
+const JobPost: React.FC = () => {
+    const { jobPostId } = useParams();
+    const props = //get job info from state
     return <div className="row">
         <div className="col-12 p-3">
+            <h1>{jobPostId}</h1>
             <button onClick={props.onClick} className="btn-arrow-left btn-simple">Back to Posts</button>
             <div className="row align-items-center">
                 <div className="col-lg-6 col-12">

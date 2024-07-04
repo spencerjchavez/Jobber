@@ -1,15 +1,12 @@
 import './JobPostListItem.scss'
 import React from 'react';
+import { Link } from 'react-router-dom';
 import JobPostProps from 'src/global-types/JobPostProps';
 
-interface JobPostListItemProps extends JobPostProps {
-    onClick: () => void
-}
+const JobPostListItem : React.FC<JobPostProps> = (props) => {
 
-const JobPostListItem : React.FC<JobPostListItemProps> = (props) => {
-
-    return <>
-        <div className='job-post-list-item-container p-3' onClick={props.onClick}>
+    return <Link to='/job-post/${props.jobPostId}'>
+        <div className='job-post-list-item p-3'>
             <div className="row align-items-center">
                 <div className="col-12">
                     <h3 className="d-inline-block pe-3">{props.title}</h3>
@@ -20,7 +17,7 @@ const JobPostListItem : React.FC<JobPostListItemProps> = (props) => {
                 </div>
             </div>
         </div>
-    </>
+    </Link>
 }
 
 export default JobPostListItem;
