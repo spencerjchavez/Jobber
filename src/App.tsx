@@ -2,6 +2,7 @@ import JobPostingsContainer from './features/job-postings/JobPostingsContainer';
 import './App.scss'
 import { Route, Routes } from 'react-router-dom';
 import JobPost from './features/job-postings/JobPost';
+import ErrorPage from './features/ErrorPage';
 
 function App() {
 
@@ -12,11 +13,11 @@ function App() {
         <h2 className="m-0">JOBBER</h2>
       </div>
     </div>
-    {/* Insert route countainer here */}
     <Routes>
       {/*job postings routes */}
       <Route path='/' element={<JobPostingsContainer />} />
-      <Route path='/jobPost/:jobPostId' element={<JobPost />} />
+      <Route path='/job-post/:jobPostId' element={<JobPost />} />
+      <Route path='*' element={<ErrorPage />} />
     </Routes>
   </div>)
 }

@@ -5,7 +5,7 @@ import JobPostProps from 'src/global-types/JobPostProps';
 
 const JobPostListItem : React.FC<JobPostProps> = (props) => {
 
-    return <Link to='/job-post/${props.jobPostId}'>
+        return <Link to={`/job-post/${props.jobPostId}`} state={{"props": props}}>
         <div className='job-post-list-item p-3'>
             <div className="row align-items-center">
                 <div className="col-12">
@@ -13,7 +13,7 @@ const JobPostListItem : React.FC<JobPostProps> = (props) => {
                     <p className="d-inline-block ">posted by: <b>{props.authorName}</b></p>
                 </div>
                 <div className="col-12">
-                    <p>{props.description.substring(0, props.description.indexOf(' ', 350))}... <span className="small"><a>Read More</a></span></p>
+                    <p>{props.description.substring(0, props.description.indexOf(' ', 350))}... <span className="small a">Read More</span></p>
                 </div>
             </div>
         </div>

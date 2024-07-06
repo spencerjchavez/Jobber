@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import jobPostsReducer from './jobPostsSlice';
 
-const store = configureStore({
+export const store = configureStore({
   reducer: combineReducers({
     jobPosts: jobPostsReducer
   })

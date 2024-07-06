@@ -130,12 +130,13 @@ svg {
 }
 
 // buttons
-button {
+button, a, .a {
 	cursor: pointer;
 	position: relative;
 	font-weight: 600;
 	font-size: 16px * $text-size-multiplier;
 	color: $color-header;
+	text-decoration: none;
 }
 button:hover {
 	color: black;
