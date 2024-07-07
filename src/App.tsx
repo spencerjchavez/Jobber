@@ -6,19 +6,21 @@ import ErrorPage from './features/ErrorPage';
 
 function App() {
 
-  return (<div className="container-fluid app">
+  return (<div className="app">
     {/* header */}
-    <div className="row">
-      <div className="col-12 text-center py-2 dark bg-color-primary">
-        <h2 className="m-0">JOBBER</h2>
-      </div>
+      <div className="row header sticky dark align-items-center">
+        <div className="col-12 text-center">
+          <h2 className="m-0 alt-font">Work Smarter</h2>
+        </div>
     </div>
-    <Routes>
-      {/*job postings routes */}
-      <Route path='/' element={<JobPostingsContainer />} />
-      <Route path='/job-post/:jobPostId' element={<JobPost />} />
-      <Route path='*' element={<ErrorPage />} />
-    </Routes>
+    <div className="row content">
+      <Routes>
+        {/*job postings routes */}
+        <Route path='/' element={<JobPostingsContainer />} />
+        <Route path='/job-post/:jobPostId' element={<JobPost />} />
+        <Route path='*' element={<ErrorPage />} />
+      </Routes>
+    </div>
   </div>)
 }
 

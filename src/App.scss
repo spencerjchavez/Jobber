@@ -1,3 +1,4 @@
+@import 'src/theme-variables.scss';
 
 html::-webkit-scrollbar {
   display: none;
@@ -9,3 +10,18 @@ html {
   scrollbar-width: none;  /* Firefox */
 }
 
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.app > .header {
+  width: 100%;
+  height: $header-height;
+  z-index: 10;
+  background: linear-gradient(170deg, #f15a24 0%, #ff7f50 100%);
+}
+
+.app > .content {
+  max-width: 1350px;
+}

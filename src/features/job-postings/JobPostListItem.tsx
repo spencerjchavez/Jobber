@@ -5,7 +5,7 @@ import JobPostProps from 'src/global-types/JobPostProps';
 
 const JobPostListItem : React.FC<JobPostProps> = (props) => {
 
-        return <Link to={`/job-post/${props.jobPostId}`} state={{"props": props}}>
+        return <Link to={`/job-post/${props.jobPostId}`}>
         <div className='job-post-list-item p-3'>
             <div className="row align-items-center">
                 <div className="col-12">

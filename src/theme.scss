@@ -1,21 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* color variables */
-$color-primary: #f15a24;
-$color-secondary: black;
-$color-offwhite: rgb(243, 243, 243);
-$color-offwhite-darker: rgb(230, 230, 230);
-
-/* font variables */
-$text-size-multiplier: .9;
-$color-header: #404040;
-$color-body: #202020;
+@import 'src/theme-variables.scss';
 
 /* fonts */
 body {
 	font-family: 'Lato', sans-serif;
 	color: $color-body;
+}
+.alt-font {
+	font-family: 'Roboto Condensed';
+	letter-spacing: .05em;
+	font-weight: 300;
 }
 h1, h2, h3, h4 {
 	font-family: 'Roboto';
@@ -60,7 +57,7 @@ h3{
 
 h4{
 	font-size: 16px * $text-size-multiplier;
-	font-weight: 400;
+	font-weight: 500;
 }
 
 h5, h6 {
@@ -71,6 +68,7 @@ h5, h6 {
 
 p {
 	font-size: 16px * $text-size-multiplier;
+	font-weight: 400;
 }
 p.lead{
 	font-size: 25.89px * $text-size-multiplier;
@@ -123,39 +121,109 @@ a {
 	color: $color-body;
 }
 
+.row {
+	align-items: start;
+}
+
+.sticky {
+	position: sticky;
+	left: 0;
+	top: 0;
+	&:not(.header) {
+		top: $header-height;
+	}
+}
+
 /* icons */
 svg {
 	width: 100%;
 	height: 100%;
 }
 
-// buttons
-button, a, .a {
+/* Images */
+img {
+	object-fit: cover;
+	width: 100%;
+}
+img.rounded-circle {
+	aspect-ratio: 1;
+}
+
+// Buttons
+.btn {
+	margin: 0 0 1em 0;
+}
+.btn, a, .a {
 	cursor: pointer;
 	position: relative;
 	font-weight: 600;
 	font-size: 16px * $text-size-multiplier;
-	color: $color-header;
 	text-decoration: none;
+	color: $color-header;
+	&:hover {
+		color: black;
+	}
 }
-button:hover {
-	color: black;
+/* Standard Button */
+@mixin btn-standard($background-color, $text-color) {
+	display: inline-block;
+	border: none;
+	background-color: $background-color;
+	border-radius: 0;
+	color: $text-color;
+	&:hover {
+		background-color: darken($background-color, 10%);
+		color: darken($text-color, 10%);
+	}
+	&:not(.w-100) + .btn {
+		margin-left: 1em;
+	}
 }
 
+.btn-standard {
+	@include btn-standard($color-primary, white);
+}
+
+.btn-standard.color-secondary {
+	@include btn-standard($color-secondary, white);
+}
+
+.btn-standard.color-white {
+	@include btn-standard(white, $color-header);
+}
+
+/* Outline Button */
+@mixin btn-outline($color) {
+	background-color: unset;
+	border: 1px solid $color;
+	border-radius: 0;
+	color: $color;
+	&:hover {
+		background-color: $color;
+		color: white;
+	}
+}
+
+.btn-outline {
+	@include btn-outline($color-primary);
+}
+
+/* Simple Button*/
 .btn-simple {
 	background-color: unset;
 	border: none;
 	padding: 0;
-	margin: 0 0 1em 0;
 }
 
+
+/* Button Icons */
 @mixin absolute-position-center-y($additional-transform: null) {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%) #{$additional-transform};
 }
 
-.btn-arrow-left {
+.btn-icon-arrow-left {
 	&::before {
 		content: "<";
 		@include absolute-position-center-y(translateX(-100%));
@@ -169,7 +237,7 @@ button:hover {
 	}
 }
 
-.btn-arrow-right {
+.btn-icon-arrow-right {
 	&::after {
 		content: ">";
 		@include absolute-position-center-y(translateX(100%));

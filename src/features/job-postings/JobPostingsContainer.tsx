@@ -3,6 +3,8 @@ import MainContainer from '../../components/MainContainer';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store/store';
 
+
+
 const JobPostingsContainer: React.FC = () => {
     const jobPostPropsMap = useSelector((store: RootState) => store.jobPosts.jobPostProps);
     console.log(jobPostPropsMap)
@@ -11,7 +13,7 @@ const JobPostingsContainer: React.FC = () => {
         <div className="col-12">
             { <MainContainer 
                 sidebarLeft={<>
-                    <h3>Sidebar Left</h3>
+                    <h3>Job Categories</h3>
                 </>}
                 mainContent={
                     jobPostProps.map((props) => {

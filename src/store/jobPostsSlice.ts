@@ -4,6 +4,7 @@ import JobPostProps from 'src/global-types/JobPostProps';
 // Define a type for the slice state
 export interface PostsState {
   jobPostProps: Map<number, JobPostProps>
+  jobCategoryFilter: number[]
 }
 
 // Define the initial state using that type
@@ -18,12 +19,13 @@ for(let i = 0; i < 8; i++) {
     category: 'Construction',
     title: 'AC Repair Needed on my cental AC',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    images: []
+    images: ['https://callapollo.com/wp-content/uploads/db22d679-771b-433a-ac3b-518df7381412.jpg', 'https://www.cielowigle.com/wp-content/uploads/2021/05/AC-condenser.jpg']
   });
 }
 
 const initialState: PostsState = {
-  jobPostProps: initialJobPostProps
+  jobPostProps: initialJobPostProps,
+  jobCategoryFilter: []
 }
 
 export const jobPostsSlice = createSlice({
@@ -39,9 +41,15 @@ export const jobPostsSlice = createSlice({
     },
     deleteJobPosts: (state, action: PayloadAction<number[]>) => {
       action.payload.forEach((jobPostId) => {
-        state.jobPostProps.delete(jobPostId)
+        state.jobPostProps.delete(jobPostId);
       })
     },
+    addCategoryToFilter: (state, action: PayloadAction<number>) => {
+      state.jobCategoryFilter.push(action.payload);
+    },
+    removeCategoryFromFilter: (state, action: PayloadAction<number>) => {
+      
+    }
   },
 })
 
