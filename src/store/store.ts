@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import jobPostsReducer from './jobPostsSlice';
+import contractorReducer from './contractorsSlice';
 
 export const store = configureStore({
   reducer: combineReducers({
-    jobPosts: jobPostsReducer
+    jobPosts: jobPostsReducer,
+    contractors: contractorReducer
   })
 });
 

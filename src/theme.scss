@@ -152,6 +152,9 @@ img.rounded-circle {
 // Buttons
 .btn {
 	margin: 0 0 1em 0;
+	&:not(.w-100):not(:last-of-type) {
+		margin-right: 5px;
+	}
 }
 .btn, a, .a {
 	cursor: pointer;
@@ -175,9 +178,7 @@ img.rounded-circle {
 		background-color: darken($background-color, 10%);
 		color: darken($text-color, 10%);
 	}
-	&:not(.w-100) + .btn {
-		margin-left: 1em;
-	}
+
 }
 
 .btn-standard {
@@ -213,6 +214,10 @@ img.rounded-circle {
 	background-color: unset;
 	border: none;
 	padding: 0;
+}
+
+.btn-capsule {
+	border-radius: 100px;
 }
 
 

@@ -30,7 +30,7 @@ const JobPost: React.FC = () => {
             mainContent={
                 <div className="row">
                     <div className="col-12">
-                        <Link to="/" className="btn btn-icon-arrow-left btn-simple">Back to Posts</Link>
+                        <Link to="/job-postings" className="btn btn-icon-arrow-left btn-simple">Back to Posts</Link>
                         <div className="row">
                             <div className="col-12 col-lg-6">
                                 <h3>{props.title}</h3>
