@@ -1,6 +1,9 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import jobPostsReducer from './jobPostsSlice';
 import contractorReducer from './contractorsSlice';
+import { enableMapSet } from 'immer'; 
+
+enableMapSet();
 
 export const store = configureStore({
   reducer: combineReducers({

@@ -4,6 +4,8 @@ import { Route, Routes } from 'react-router-dom';
 import JobPost from './features/job-postings/JobPost';
 import ContractorSearch from './features/contractors/ContractorSearch'
 import ErrorPage from './features/ErrorPage';
+import Contractor from './features/contractors/Contractor';
+import GetInTouch from './features/contractors/GetInTouch';
 
 function App() {
 
@@ -17,6 +19,8 @@ function App() {
     <Routes>
       {/*job postings routes */}
       <Route path='/' element={<ContractorSearch />} />
+      <Route path='/contractor/:contractorId' element={<Contractor />}/>
+      <Route path='/contractor/:contractorId/get-in-touch' element={<GetInTouch />}/>
       <Route path='/job-postings' element={<JobPostingsContainer />} />
       <Route path='/job-post/:jobPostId' element={<JobPost />} />
       <Route path='*' element={<ErrorPage />} />

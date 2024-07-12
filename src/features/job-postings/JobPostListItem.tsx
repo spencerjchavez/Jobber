@@ -13,7 +13,7 @@ const JobPostListItem : React.FC<JobPostProps> = (props) => {
                     <p className="d-inline-block ">posted by: <b>{props.authorName}</b></p>
                 </div>
                 <div className="col-12">
-                    <p>{props.description.substring(0, props.description.indexOf(' ', 350))}... <span className="small a">Read More</span></p>
+                    <p>{props.description.substring(0, props.description.indexOf(' ', 350))}... <span className="a">Read More</span></p>
                 </div>
             </div>
         </div>
