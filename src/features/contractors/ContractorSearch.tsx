@@ -34,13 +34,10 @@ const ContractorSearch: React.FC = () => {
     }
 
     return <>
-    <LoadScript googleMapsApiKey="AIzaSyBk_dx_wDfivtCPGCZWXPBwzRQZIXdPT6o" libraries={['places']}>
-        <AutocompleteInput onPlaceSelected={handlePlaceSelected}/>
-    </LoadScript>
     <MainContainer 
     sidebarLeft={<>
         <h3 className="text-center">Contractor Type</h3>
-        {Array.from(jobCategoryFilter.entries()).sort().map((filterEntry) => {
+        {Array.from(Object.entries(jobCategoryFilter)).sort().map((filterEntry) => {
             const jobCategory = filterEntry[0];
             const isActive = filterEntry[1];
             return <a key={jobCategory} className={`btn ${isActive ? 'btn-standard' : 'btn-outline'} color-primary btn-capsule w-100`} onClick={() => dispatch(toggleCategoryOnFilter(jobCategory))}>{jobCategory}</a>
@@ -48,8 +45,11 @@ const ContractorSearch: React.FC = () => {
     </>}
     mainContent={<div className="row">
         <div className="col-12">
-        <h4>Showing Contractors Who Serve <a>{searchInput}</a>:</h4> 
-            {Array.from(contractorProps.values()).map((contractorProps) => {
+            <h4 className="d-inline-block">Showing Contractors Near:</h4>
+            <LoadScript googleMapsApiKey="AIzaSyBk_dx_wDfivtCPGCZWXPBwzRQZIXdPT6o" libraries={['places']}>
+                <AutocompleteInput onPlaceSelected={handlePlaceSelected}/>
+            </LoadScript>
+            {Array.from(Object.values(contractorProps)).map((contractorProps) => {
                 return <ContractorListItem key={contractorProps.contractorId} {...contractorProps} />
             })}
         </div>

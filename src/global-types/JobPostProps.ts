@@ -1,6 +1,6 @@
 export default interface JobPostProps {
     jobPostId: number;
-    postDate: Date;
+    postDate: number;
     authorName: string;
     authorId: number;
     profilePictureURL: string;

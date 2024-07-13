@@ -6,8 +6,8 @@ import { RootState } from 'src/store/store';
 
 
 const JobPostingsContainer: React.FC = () => {
-    const jobPostPropsMap = useSelector((store: RootState) => store.jobPosts.jobPostProps);
-    const jobPostProps = Array.from(jobPostPropsMap.values());
+    const jobPostPropsState = useSelector((store: RootState) => store.jobPosts.jobPostProps);
+    const jobPostProps = Array.from(Object.values(jobPostPropsState));
     return <div className="row">
         <div className="col-12">
             { <MainContainer 
