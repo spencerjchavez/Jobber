@@ -1,6 +1,6 @@
 import JobPostingsContainer from './features/job-postings/JobPostingsContainer';
 import './App.scss'
-import { Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import JobPost from './features/job-postings/JobPost';
 import ContractorSearch from './features/contractors/ContractorSearch'
 import ErrorPage from './features/ErrorPage';
@@ -13,6 +13,7 @@ function App() {
     {/* header */}
       <div className="row header sticky dark align-items-center">
         <div className="col-12 text-center">
+          <Link className="fill" to={`/`} />
           <h2 className="m-0 alt-font">Work Smarter</h2>
         </div>
     </div>
