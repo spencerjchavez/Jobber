@@ -23,6 +23,7 @@ const AutocompleteInput: React.FC<AutocompleteInputProps> = ({ onPlaceSelected }
 
   return (
     <Autocomplete
+      className='d-inline-block'
       onLoad={onLoad}
       options={{fields: ["address_components", "geometry", "name"]}}
       onPlaceChanged={onPlaceChanged}
@@ -31,6 +32,7 @@ const AutocompleteInput: React.FC<AutocompleteInputProps> = ({ onPlaceSelected }
         type="text"
         placeholder="Enter a location"
         style={{
+          display: 'inline-block',
           boxSizing: `border-box`,
           border: `1px solid transparent`,
           width: `240px`,

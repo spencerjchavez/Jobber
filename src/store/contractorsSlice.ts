@@ -1,14 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import ContractorProps from 'src/global-types/ContractorProps';
+import ContractorRating from 'src/global-types/ContractorRating';
+import ContractorRatingsProps from 'src/global-types/ContractorRatingsProps';
 
 // Define a type for the slice state
 export interface ContractorsState {
     contractorProps: { [contractorId: number]: ContractorProps};
+    contractorRatings: Record<number, ContractorRatingsProps>;
     jobCategoryFilter: { [jobCategory: string]: boolean};
 }
 
 // Define the initial state
 const initialContractorProps: { [contractorId: number]: ContractorProps} = {};
+const initialContractorRatingsProps: { [contractorId: number]: ContractorRatingsProps} = {};
 for(let i=0; i<20; i++) {
     const exampleContractorProps: ContractorProps = {
         name: 'Plumber Wannabe',
@@ -24,6 +28,11 @@ for(let i=0; i<20; i++) {
         portfolioImages: []
     }
     initialContractorProps[i] = exampleContractorProps;
+    initialContractorRatingsProps[i] = {
+        contractorId: i,
+        ratings: [],
+        avgStars: 5
+    }
 }
 
 const exampleCategories = ['Plumber', 'Construction', 'Landscaper', 'Electrician', 'Hvac Technician'];
@@ -34,6 +43,7 @@ exampleCategories.forEach((category) => {
 
 const initialState: ContractorsState = {
   contractorProps: initialContractorProps,
+  contractorRatings: initialContractorRatingsProps,
   jobCategoryFilter: initialJobCategoryFilter
 }
 
@@ -52,6 +62,13 @@ export const ContractorsSlice = createSlice({
         action.payload.forEach((contractorId) => {
             delete state.contractorProps[contractorId];
         })
+        },
+        addRatings: (state, action: PayloadAction<ContractorRating[]>) => {
+            action.payload.forEach((contractorRating) => {
+                const {avgStars, ratings} = state.contractorRatings[contractorRating.contractorId];
+                state.contractorRatings[contractorRating.contractorId].avgStars = (avgStars * ratings.length + contractorRating.stars) / (ratings.length + 1);
+                state.contractorRatings[contractorRating.contractorId].ratings.push(contractorRating);
+            })
         },
         enableCategoryOnFilter: (state, action: PayloadAction<string>) => {
             if (state.jobCategoryFilter[action.payload] != null) {

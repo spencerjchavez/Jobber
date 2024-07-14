@@ -7,9 +7,9 @@ import { useState } from "react";
 import { Autocomplete, LoadScript } from "@react-google-maps/api";
 import AutocompleteInput from "../locations/AutocompleteInput";
 import Location from "../locations/Location";
+import secrets from "../../assets/secrets"
 
 const ContractorSearch: React.FC = () => {
-    
     const { contractorProps, jobCategoryFilter } = useSelector((state: RootState) => state.contractors);
     const dispatch: AppDispatch = useDispatch();
     
@@ -45,8 +45,8 @@ const ContractorSearch: React.FC = () => {
     </>}
     mainContent={<div className="row">
         <div className="col-12">
-            <h4 className="d-inline-block">Showing Contractors Near:</h4>
-            <LoadScript googleMapsApiKey="AIzaSyBk_dx_wDfivtCPGCZWXPBwzRQZIXdPT6o" libraries={['places']}>
+            <LoadScript googleMapsApiKey={secrets.maps_api_key} libraries={['places']}>
+                <h4 className="d-inline-block">Showing Contractors Near:</h4>
                 <AutocompleteInput onPlaceSelected={handlePlaceSelected}/>
             </LoadScript>
             {Array.from(Object.values(contractorProps)).map((contractorProps) => {
