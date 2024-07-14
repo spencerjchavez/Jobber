@@ -91,11 +91,6 @@ a {
 }
 
 
-/* mobile / tablet styles */
-@media only screen and (max-width: 991px) {
-
-}
-
 /* container styles */
 .bg-color-primary {
 	background-color: $color-primary;
@@ -118,8 +113,16 @@ a {
 .sticky {
 	position: sticky;
 	left: 0;
-	top: 0;
-	&:not(.header) {
+	top: $header-height;
+	&.header {
+		top: 0
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.sticky-lg {
+		position: sticky;
+		left: 0;
 		top: $header-height;
 	}
 }

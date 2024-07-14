@@ -10,10 +10,11 @@ const JobPost: React.FC = () => {
     const jobPostIdNumber = +(jobPostId ?? '-1');
 
     const jobPostProps = useSelector((state: RootState) => state.jobPosts.jobPostProps);
-    const props = jobPostProps.get(jobPostIdNumber);
+    const props = jobPostProps[jobPostIdNumber];
     if (props == null) {
         return <ErrorPage />
     } else {
+        const postDate = new Date(props.postDate);
         return <>
             <MainContainer sidebarLeft={
                 <div className="row">
@@ -36,7 +37,7 @@ const JobPost: React.FC = () => {
                                 <h3>{props.title}</h3>
                             </div>
                             <div className="col-12 col-lg-6 text-end">
-                                <p>Posted: {(props.postDate.getMonth() + 1) + '/' + props.postDate.getDate()}</p>
+                                <p>Posted: {(postDate.getMonth() + 1) + '/' + postDate.getDate()}</p>
                             </div>
                         </div>
                         <p>{props.description}</p>
