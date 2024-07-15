@@ -119,6 +119,13 @@ a {
 	}
 }
 
+.color-primary {
+	color: $color-primary;
+}
+.color-secondary {
+	color: $color-secondary;
+}
+
 @media only screen and (min-width: 992px) {
 	.sticky-lg {
 		position: sticky;

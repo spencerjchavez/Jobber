@@ -5,21 +5,20 @@ import ContractorProps from 'src/global-types/ContractorProps';
 import ContractorRatings from '../ratings/ContractorRatings';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store/store';
-
-const contractorRatings = useSelector((state: RootState) => state.contractors.ratings)
-
 const ContractorListItem : React.FC<ContractorProps> = (props) => {
-    return <div className="row align-items-center contractor-list-item p-3">
+    const contractorRatings = useSelector((state: RootState) => state.contractors.contractorRatings[props.contractorId] ?? {});
+    return <div className="row contractor-list-item p-3">
         <Link to={`/contractor/${props.contractorId}`} className="fill" />
-        <div className="col-2">
+        <div className="col-2 text-center">
             <img className="img-fluid rounded-circle" src={props.profilePicture}/>
+            <ContractorRatings type='condensed-vertical' {...contractorRatings}/>
+
         </div>
         <div className="col-10">
-            <h3 className="d-inline-block">{props.name}</h3>
-            <ContractorRatings type='condensed' {...ratingsProps} />
+            <h3 className="d-inline-block mb-0">{props.name}</h3>
             <p>{props.specialty}</p>
             <Link className="btn btn-standard color-primary" to={`/contractor/${props.contractorId}/get-in-touch`}>Get In Touch</Link>
-            <Link to={`/contractor/${props.contractorId}`} className="btn btn-simple color-primary btn-icon-arrow-right">Click to See Portfolio</Link>
+            <Link to={`/contractor/${props.contractorId}`} className="btn btn-simple color-primary btn-icon-arrow-right">View Portfolio</Link>
         </div>
     </div>
 }

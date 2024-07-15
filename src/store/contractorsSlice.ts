@@ -31,7 +31,7 @@ for(let i=0; i<20; i++) {
     initialContractorRatingsProps[i] = {
         contractorId: i,
         ratings: [],
-        avgStars: 5
+        avgStars: 0
     }
 }
 
@@ -65,6 +65,13 @@ export const ContractorsSlice = createSlice({
         },
         addRatings: (state, action: PayloadAction<ContractorRating[]>) => {
             action.payload.forEach((contractorRating) => {
+                if (!state.contractorRatings[contractorRating.contractorId]) {
+                    state.contractorRatings[contractorRating.contractorId] = {
+                        contractorId: contractorRating.contractorId,
+                        ratings: [],
+                        avgStars: 0
+                    }
+                }
                 const {avgStars, ratings} = state.contractorRatings[contractorRating.contractorId];
                 state.contractorRatings[contractorRating.contractorId].avgStars = (avgStars * ratings.length + contractorRating.stars) / (ratings.length + 1);
                 state.contractorRatings[contractorRating.contractorId].ratings.push(contractorRating);
