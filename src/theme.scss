@@ -184,11 +184,10 @@ p > a, p > .a {
 	background-color: $background-color;
 	border-radius: 0;
 	color: $text-color;
-	&:hover {
-		background-color: darken($background-color, 10%);
-		color: darken($text-color, 10%);
+	&:hover, &:active {
+		background-color: darken($background-color, 10%) !important;
+		color: darken($text-color, 10%) !important;
 	}
-
 }
 
 .btn-standard {
@@ -210,9 +209,9 @@ p > a, p > .a {
 	padding: calc(.375rem - 1px) calc(.75rem - 1px);
 	border-radius: 0;
 	color: $color;
-	&:hover {
-		background-color: $color;
-		color: white;
+	&:hover, &:active {
+		background-color: $color !important;
+		color: white !important;
 	}
 }
 

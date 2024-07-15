@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Autocomplete, LoadScript } from "@react-google-maps/api";
 import AutocompleteInput from "../locations/AutocompleteInput";
 import Location from "../locations/Location";
-import secrets from "../../assets/secrets"
+import secrets from "../../assets/secrets";
 
 const ContractorSearch: React.FC = () => {
     const { contractorProps, jobCategoryFilter } = useSelector((state: RootState) => state.contractors);
