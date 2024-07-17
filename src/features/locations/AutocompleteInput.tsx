@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Autocomplete } from '@react-google-maps/api';
+import 'src/theme-variables.scss';
 
 interface AutocompleteInputProps {
   onPlaceSelected: (place: google.maps.places.PlaceResult) => void;
@@ -30,16 +31,16 @@ const AutocompleteInput: React.FC<AutocompleteInputProps> = ({ onPlaceSelected }
     >
       <input
         type="text"
-        placeholder="Enter a location"
+        placeholder="Enter a Location"
         style={{
           display: 'inline-block',
-          boxSizing: `border-box`,
-          border: `1px solid transparent`,
-          width: `240px`,
-          padding: `0 12px`,
-          borderRadius: `3px`,
-          boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-          fontSize: `14px`,
+          //boxSizing: `border-box`,
+          border: `1px solid #ccc`,
+          borderRadius: '5px',
+          width: `200px`,
+          padding: `0 5px`,
+          //boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+          fontSize: `18px`,
           outline: `none`,
           textOverflow: `ellipses`,
         }}

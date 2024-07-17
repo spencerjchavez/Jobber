@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import MainContainer from "../../components/MainContainer";
+import MainContainer from "src/components/MainContainer";
 import { AppDispatch, RootState } from "src/store/store";
-import { toggleCategoryOnFilter } from "../../store/contractorsSlice";
+import { toggleCategoryOnFilter } from "src/store/contractorsSlice";
 import ContractorListItem from "./ContractorListItem";
 import { useState } from "react";
 import { Autocomplete, LoadScript } from "@react-google-maps/api";
@@ -46,7 +46,7 @@ const ContractorSearch: React.FC = () => {
     mainContent={<div className="row">
         <div className="col-12">
             <LoadScript googleMapsApiKey={secrets.maps_api_key} libraries={['places']}>
-                <h4 className="d-inline-block">Showing Contractors Near:</h4>
+                <h4 className="d-inline-block me-2">Showing Contractors Near:</h4>
                 <AutocompleteInput onPlaceSelected={handlePlaceSelected}/>
             </LoadScript>
             {Array.from(Object.values(contractorProps)).map((contractorProps) => {
