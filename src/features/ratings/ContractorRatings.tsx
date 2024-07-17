@@ -19,16 +19,16 @@ const ContractorRatings: React.FC<Props> = (props) => {
 }
 
 const CondensedVertical: React.FC<Props> = (props) => {
-    return <div className="d-flex flex-column text-center">
+    return <div className="d-flex flex-column text-center mb-3">
         <div className="d-flex justify-content-center pb-2">
             { // filled stars
                 Array.from({length: props.avgStars}).map((_, i) => {
-                    return <div className="d-inline-block color-primary" style={{width: '15px', height:'15px'}} key={i}><StarFilled /></div>
+                    return <div className="d-inline-block color-primary" style={{width: '17px', height:'17px'}} key={i}><StarFilled /></div>
                 })
             } 
             { // not-filled stars
                 Array.from({length: 5 - props.avgStars}).map((_, i) => {
-                    return <div className="d-inline-block color-primary" style={{width: '15px', height: '15px'}} key={i}><StarOutline /></div>
+                    return <div className="d-inline-block color-primary" style={{width: '17px', height: '17px'}} key={i}><StarOutline /></div>
                 })
             }
         </div>

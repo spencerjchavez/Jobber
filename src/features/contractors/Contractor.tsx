@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { RootState } from "src/store/store";
 import ErrorPage from "../ErrorPage";
 import MainContainer from "../../components/MainContainer";
+import ContractorRatings from "../ratings/ContractorRatings";
+import Gallery from "src/components/Gallery";
 
 const Contractor: React.FC = () => {
     const params = useParams();
@@ -14,21 +16,31 @@ const Contractor: React.FC = () => {
     if (props == null) {
         return <ErrorPage />
     } else {
+        const contractorRatings = useSelector((state: RootState) => state.contractors.contractorRatings[contractorIdNumber]);
         return <MainContainer
         sidebarLeft={<>
             <div className="row">
                 <div className="col-12 text-center">
-                    {/*poster info, make a bid, ask for info */}
-                    <img className="img-fluid rounded-circle mb-3" src={props.profilePicture} />
-                    <h4>Posted By: <a href="">{props.name}</a></h4>        
-                    <div className="py-2"></div>      
-                    <a className="btn btn-standard color-primary uppercase w-100">Make A Bid</a>
-                    <a className="btn btn-outline color-primary uppercase w-100">Ask The Client</a>
+                    <img className="img-fluid rounded-circle p-3" src={props.profilePicture} />
+                    <h4>{props.name}</h4>        
+                    { contractorRatings && <ContractorRatings type='condensed-vertical' {...contractorRatings}/> }
+                    <a className="btn btn-standard color-primary uppercase w-100">Get in Touch</a>
+
                 </div>
             </div>
         </>}
         mainContent={<>
-
+            <div className="row">
+                <div className="col-12">
+                    <h4>About Us</h4>
+                    <p>{props.about}</p>
+                    <h4>Our Portfolio</h4>
+                    <Gallery images={props.portfolioImages}/>
+                    <h4>Services Offered</h4>
+                    <h4>Areas We Serve</h4>
+                    <h4>Client Reviews</h4>
+                </div>
+            </div>
         </>}
         />
     }

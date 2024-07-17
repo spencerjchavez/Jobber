@@ -6,13 +6,12 @@ import ContractorRatings from '../ratings/ContractorRatings';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store/store';
 const ContractorListItem : React.FC<ContractorProps> = (props) => {
-    const contractorRatings = useSelector((state: RootState) => state.contractors.contractorRatings[props.contractorId] ?? {});
-    return <div className="row contractor-list-item p-3">
+    const contractorRatings = useSelector((state: RootState) => state.contractors.contractorRatings[props.contractorId]);
+    return <div className="row contractor-list-item">
         <Link to={`/contractor/${props.contractorId}`} className="fill" />
         <div className="col-2 text-center">
             <img className="img-fluid rounded-circle mb-1" src={props.profilePicture}/>
-            <ContractorRatings type='condensed-vertical' {...contractorRatings}/>
-
+            { contractorRatings && <ContractorRatings type='condensed-vertical' {...contractorRatings}/> }
         </div>
         <div className="col-10">
             <h3 className="d-inline-block">{props.name}</h3>
