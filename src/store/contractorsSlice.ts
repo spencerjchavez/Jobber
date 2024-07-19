@@ -31,8 +31,16 @@ for(let i=0; i<20; i++) {
     initialContractorProps[i] = exampleContractorProps;
     initialContractorRatingsProps[i] = {
         contractorId: i,
-        ratings: [],
-        avgStars: 0
+        ratings: Array.from({length: 10}).map(() => {
+            return {
+                stars: Math.floor(Math.random() * 5) + 1,
+                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'.substring(0, Math.random()* 1200),
+                contractorId: i,
+                authorUserId: 0,
+                date: 0
+            }
+        }),
+        avgStars: 5
     }
 }
 

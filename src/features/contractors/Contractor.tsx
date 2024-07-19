@@ -38,7 +38,8 @@ const Contractor: React.FC = () => {
                     <Gallery images={props.portfolioImages}/>
                     <h4>Services Offered</h4>
                     <h4>Areas We Serve</h4>
-                    <h4>Client Reviews</h4>
+                    <h4 id="reviews">Client Reviews</h4>
+                    { contractorRatings && <ContractorRatings type='large' {...contractorRatings}/> }
                 </div>
             </div>
         </>}
