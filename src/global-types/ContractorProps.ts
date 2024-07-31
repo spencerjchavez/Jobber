@@ -8,5 +8,6 @@ export default interface ContractorProps {
     contractorId: number;
     profilePicture: string;
     portfolioImages: string[];
+    services: string[];
     about: string;
 }

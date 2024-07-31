@@ -11,9 +11,9 @@ const JobPostingsContainer: React.FC = () => {
     return <div className="row">
         <div className="col-12">
             { <MainContainer 
-                sidebarLeft={<>
+                sidebarLeft={<div>
                     <h3>Job Categories</h3>
-                </>}
+                </div>}
                 mainContent={
                     jobPostProps.map((props) => {
                         return <JobPostListItem key={props.jobPostId} {...props}/>

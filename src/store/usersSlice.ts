@@ -7,7 +7,13 @@ export interface UsersState {
 }
 
 // Define the initial state
-const initialUserProps: { [userId: number]: UserProps} = {};
+const initialUserProps: { [userId: number]: UserProps} = {
+    1: {
+        userId: 1,
+        name: 'Stacy Williams',
+        profilePicture: 'https://qph.cf2.quoracdn.net/main-qimg-6f8532751ceb198802a5a438cb5c634e-lq'
+    }
+};
 
 const initialState: UsersState = {
     userProps: initialUserProps,

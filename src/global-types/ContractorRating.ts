@@ -1,6 +1,6 @@
 export default interface ContractorRating {
     stars: number
-    text: string | null
+    text?: string
     contractorId: number
     authorUserId: number
     date: number

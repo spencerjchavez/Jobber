@@ -26,21 +26,24 @@ for(let i=0; i<20; i++) {
         contractorId: i,
         profilePicture: 'https://bloximages.newyork1.vip.townnews.com/stltoday.com/content/tncms/assets/v3/editorial/3/3b/33b9e530-5c2c-54ea-9de9-52ed38678502/55836d201d850.image.jpg',
         portfolioImages: ['https://wentworthplumbing.ca/wp-content/uploads/2019/02/industrialplumbingpipes-800x450.jpg', 'https://trusteyman.com/wp-content/uploads/2020/07/commercial-plumber-1-1024x683.jpeg', 'https://i.redd.it/bj89ble82m5a1.jpg', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqYv6qIVUeE4xz4sSJfYTLLzy3BB_HHFegqA&s', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPbZtS_qJrmz1uh7evMzDLT700m1ZNt6YYcw&s', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzKz21h6nx_xn_lq_zTTzrULJHgLM3M9H7IA&s', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTpy6un9wKIJCsuRaxrkpIJhGt_JXxT0-oqw&s', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTpy6un9wKIJCsuRaxrkpIJhGt_JXxT0-oqw&s', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp0KTZd0RnLjjTx9tOrGo1caUxjY9I-srVLQ&s'],
+        services: ['Plumbing Repair', 'Plumbing Installation', 'Emergency Plumbing'],
         about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     }
+
+    const ratings = Array.from({length: 10}).map(() => {
+        return {
+            stars: Math.floor(Math.random() * 5) + 1,
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'.substring(0, Math.random()* 1200),
+            contractorId: i,
+            authorUserId: 1,
+            date: 0
+        }
+    });
     initialContractorProps[i] = exampleContractorProps;
     initialContractorRatingsProps[i] = {
         contractorId: i,
-        ratings: Array.from({length: 10}).map(() => {
-            return {
-                stars: Math.floor(Math.random() * 5) + 1,
-                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'.substring(0, Math.random()* 1200),
-                contractorId: i,
-                authorUserId: 0,
-                date: 0
-            }
-        }),
-        avgStars: 5
+        ratings,
+        avgStars: ratings.reduce((sum, rating) => rating.stars + sum, 0) / (ratings.length ? ratings.length : 1)
     }
 }
 

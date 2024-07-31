@@ -158,6 +158,7 @@ svg {
 img {
 	object-fit: cover;
 	width: 100%;
+	margin-bottom: 1em;
 }
 img.rounded-circle {
 	aspect-ratio: 1;
@@ -225,6 +226,11 @@ p > a, p > .a {
 	@include btn-outline($color-primary);
 }
 
+.btn-outline.color-gray {
+	@include btn-outline($color-gray);
+}
+
+
 /* Simple Button*/
 .btn-simple {
 	background-color: unset;
@@ -232,7 +238,7 @@ p > a, p > .a {
 	padding: 0;
 }
 
-.btn-capsule {
+.btn.btn-capsule {
 	border-radius: 100px;
 }
 

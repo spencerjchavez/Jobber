@@ -4,7 +4,7 @@ import { AppDispatch, RootState } from "src/store/store";
 import { toggleCategoryOnFilter } from "src/store/contractorsSlice";
 import ContractorListItem from "./ContractorListItem";
 import { useState } from "react";
-import { Autocomplete, LoadScript } from "@react-google-maps/api";
+import { LoadScript } from "@react-google-maps/api";
 import AutocompleteInput from "../locations/AutocompleteInput";
 import Location from "../locations/Location";
 import secrets from "../../assets/secrets";
@@ -13,8 +13,8 @@ const ContractorSearch: React.FC = () => {
     const { contractorProps, jobCategoryFilter } = useSelector((state: RootState) => state.contractors);
     const dispatch: AppDispatch = useDispatch();
     
-    const [searchInput, setSearchInput] = useState('');
-    const [searchLocation, setSearchLocation] = useState<Location|null>(null);
+    const [, setSearchInput] = useState('');
+    const [, setSearchLocation] = useState<Location|null>(null);
     const handlePlaceSelected = (place: google.maps.places.PlaceResult) => {
         setSearchInput(place.name ?? '');
         console.log(place.name ?? '');
@@ -35,14 +35,14 @@ const ContractorSearch: React.FC = () => {
 
     return <>
     <MainContainer 
-    sidebarLeft={<>
+    sidebarLeft={<div>
         <h3 className="text-center">Contractor Type</h3>
         {Array.from(Object.entries(jobCategoryFilter)).sort().map((filterEntry) => {
             const jobCategory = filterEntry[0];
             const isActive = filterEntry[1];
             return <a key={jobCategory} className={`btn ${isActive ? 'btn-standard' : 'btn-outline'} color-primary btn-capsule w-100`} onClick={() => dispatch(toggleCategoryOnFilter(jobCategory))}>{jobCategory}</a>
         })}
-    </>}
+    </div>}
     mainContent={<div className="row">
         <div className="col-12">
             <LoadScript googleMapsApiKey={secrets.maps_api_key} libraries={['places']}>

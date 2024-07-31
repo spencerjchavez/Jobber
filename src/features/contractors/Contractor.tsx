@@ -25,7 +25,7 @@ const Contractor: React.FC = () => {
                     <h4>{props.name}</h4>        
                     { contractorRatings && <ContractorRatings type='condensed-vertical' {...contractorRatings}/> }
                     <a className="btn btn-standard color-primary uppercase w-100">Get in Touch</a>
-
+                    <a className="btn btn-outline color-primary uppercase w-100">Leave a Review</a>
                 </div>
             </div>
         </>}
@@ -34,11 +34,20 @@ const Contractor: React.FC = () => {
                 <div className="col-12">
                     <h4>About Us</h4>
                     <p>{props.about}</p>
-                    <h4>Our Portfolio</h4>
+                    <h4 className="mt-5">Our Portfolio</h4>
                     <Gallery images={props.portfolioImages}/>
-                    <h4>Services Offered</h4>
-                    <h4>Areas We Serve</h4>
-                    <h4 id="reviews">Client Reviews</h4>
+                    <h4 className="mt-5">Services Offered</h4>
+                    {props.services.map((service, i) => {
+                        return <div className="btn btn-outline color-gray btn-capsule" key={i}>{service}</div>
+                    })}
+                    <h4 className="mt-5">Areas We Serve</h4>
+                    <b className="mb-0">How should we display this info??</b>
+                    <ul>
+                    <li>Could be a mali with a circle highlighting the area they serve</li>
+                    <li>Could be a list of locations lirovided by the contractor</li>
+                    <li>Could just show the city the contractor is based out of?</li>
+                    </ul>
+                    <h4 id="reviews" className="mt-5">Client Reviews</h4>
                     { contractorRatings && <ContractorRatings type='large' {...contractorRatings}/> }
                 </div>
             </div>

@@ -71,7 +71,6 @@ const Gallery: React.FC<GalleryProps> = ({images}) => {
             })
             columns[minCol].push(loadedImage);
             columnHeights[minCol] += loadedImage.height;
-            console.log(columnHeights);
         })
         setColumns(columns);
     }, [columnCount, loadedImages]);

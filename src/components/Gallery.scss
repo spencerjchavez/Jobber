@@ -1,6 +1,6 @@
 .masonry-grid {
     display: flex;
-    gap: 10px;
+    gap: 1em;
 }
 
 .masonry-col {
@@ -8,5 +8,9 @@
     flex-direction: column;
     flex-basis: 0;
     flex-grow: 1;
-    gap: 10px;
+    gap: 1em;
+
+    & > img {
+        margin-bottom: 0;
+    }
 }
