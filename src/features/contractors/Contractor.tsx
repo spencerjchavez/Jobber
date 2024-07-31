@@ -19,9 +19,11 @@ const Contractor: React.FC = () => {
         const contractorRatings = useSelector((state: RootState) => state.contractors.contractorRatings[contractorIdNumber]);
         return <MainContainer
         sidebarLeft={<>
-            <div className="row">
-                <div className="col-12 text-center">
+            <div className="row align-items-center">
+                <div className="col-6 col-lg-12 text-center">
                     <img className="img-fluid rounded-circle p-3" src={props.profilePicture} />
+                </div>
+                <div className="col-6 col-lg-12 text-center">
                     <h4>{props.name}</h4>        
                     { contractorRatings && <ContractorRatings type='condensed-vertical' {...contractorRatings}/> }
                     <a className="btn btn-standard color-primary uppercase w-100">Get in Touch</a>
@@ -34,7 +36,7 @@ const Contractor: React.FC = () => {
                 <div className="col-12">
                     <h4>About Us</h4>
                     <p>{props.about}</p>
-                    <h4 className="mt-5">Our Portfolio</h4>
+                    <h4 className="mt-5" id="portfolio">Our Portfolio</h4>
                     <Gallery images={props.portfolioImages}/>
                     <h4 className="mt-5">Services Offered</h4>
                     {props.services.map((service, i) => {
