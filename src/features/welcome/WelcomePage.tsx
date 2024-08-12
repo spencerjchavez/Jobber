@@ -4,7 +4,7 @@ import HoverCard from "src/components/HoverCard";
 import AutocompleteInput from "../locations/AutocompleteInput";
 
 const WelcomePage = () => {
-    const bgImageURLs = Array.from({length: 12}).map((_, i) => `src/assets/images/${i}.jpg`);
+    const bgImageURLs = Array.from({length: 12}).map((_, i) => `/src/assets/images/${i}.jpg`);
 
     const [isCustomer, setIsCustomer] = useState<boolean | null>(null);
 
