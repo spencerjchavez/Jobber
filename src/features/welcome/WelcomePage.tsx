@@ -2,9 +2,22 @@ import { useState } from "react";
 import Gallery from "src/components/Gallery";
 import HoverCard from "src/components/HoverCard";
 import AutocompleteInput from "../locations/AutocompleteInput";
+import image0 from 'src/assets/images/0.jpg';
+import image1 from 'src/assets/images/1.jpg';
+import image2 from 'src/assets/images/2.jpg';
+import image3 from 'src/assets/images/3.jpg';
+import image4 from 'src/assets/images/4.jpg';
+import image5 from 'src/assets/images/5.jpg';
+import image6 from 'src/assets/images/6.jpg';
+import image7 from 'src/assets/images/7.jpg';
+import image8 from 'src/assets/images/8.jpg';
+import image9 from 'src/assets/images/9.jpg';
+import image10 from 'src/assets/images/10.jpg';
+import image11 from 'src/assets/images/11.jpg';
+
 
 const WelcomePage = () => {
-    const bgImageURLs = Array.from({length: 12}).map((_, i) => `src/assets/images/${i}.jpg`);
+    const bgImageURLs = [image0, image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11];
 
     const [isCustomer, setIsCustomer] = useState<boolean | null>(null);
 
