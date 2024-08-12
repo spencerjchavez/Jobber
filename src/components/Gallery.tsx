@@ -8,13 +8,14 @@ interface GalleryProps {
     colsLg?: number;
     colsSm?: number;
     overlay?: string;
+    aspectRatio?: number;
 }
 interface LoadedImage {
     element: React.ReactElement;
     aspectRatioInverse: number;
 }
 
-const Gallery: React.FC<GalleryProps> = ({images, gap, colsLg = 4, colsSm = 2, overlay=''}) => {
+const Gallery: React.FC<GalleryProps> = ({images, gap, colsLg = 4, colsSm = 2, overlay='', aspectRatio}) => {
 
     const getColumnCount = () => window.innerWidth < 992 ? colsSm : colsLg;
     // track columns of gallery
@@ -44,8 +45,8 @@ const Gallery: React.FC<GalleryProps> = ({images, gap, colsLg = 4, colsSm = 2, o
             img.src = src;
             img.onload = () => {
                 resolve({ 
-                    element: <ImageWithOverlay src={src} alt = '' className='mb-0' overlay={overlay}/>,
-                    aspectRatioInverse: img.height / img.width 
+                    element: <ImageWithOverlay src={src} alt = '' className='mb-0' overlay={overlay} style={{aspectRatio: aspectRatio}}/>,
+                    aspectRatioInverse: img.height / img.width
                 });
             };
             img.onerror = () => {
@@ -82,6 +83,7 @@ const Gallery: React.FC<GalleryProps> = ({images, gap, colsLg = 4, colsSm = 2, o
                     minCol = index;
                 }
             })
+            // update aspect ratio
             columns[minCol].push(loadedImage);
             columnHeights[minCol] += loadedImage.aspectRatioInverse;
         })

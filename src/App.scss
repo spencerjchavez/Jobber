@@ -22,3 +22,7 @@ html {
   z-index: 10;
   background: linear-gradient(170deg, #f15a24 0%, #ff7f50 100%);
 }
+
+.app > .section, .app > .row:not(.header) {
+  margin-top: $header-height;
+}
