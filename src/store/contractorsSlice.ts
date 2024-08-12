@@ -17,11 +17,13 @@ for(let i=0; i<20; i++) {
     const exampleContractorProps: ContractorProps = {
         name: 'Plumber Wannabe',
         specialty: 'Master Plumber with 40 years of experience',
-        jobCategories: ['plumbing', 'construction'],
+        jobCategories: ['Plumber', 'construction'],
         serviceArea: {
-            latitude: 0,
-            longitude: 0,
-            radius: 40,
+            location: {
+                latitude: 40.7608,
+                longitude: -111.8910,
+            },
+            radius: 100,
         },
         contractorId: i,
         profilePicture: 'https://bloximages.newyork1.vip.townnews.com/stltoday.com/content/tncms/assets/v3/editorial/3/3b/33b9e530-5c2c-54ea-9de9-52ed38678502/55836d201d850.image.jpg',
@@ -103,7 +105,7 @@ export const ContractorsSlice = createSlice({
             if (state.jobCategoryFilter[action.payload] != null) {
                 state.jobCategoryFilter[action.payload] = !state.jobCategoryFilter[action.payload];
             }
-        }
+        },
     },
 })
 

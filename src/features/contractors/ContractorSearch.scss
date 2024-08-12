@@ -1,0 +1,10 @@
+.search-input-display {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+    padding: 0 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    font-size: 18px;
+    text-overflow: ellipsis;
+}

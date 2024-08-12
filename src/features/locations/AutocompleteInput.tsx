@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { Autocomplete } from '@react-google-maps/api';
 import 'src/theme-variables.scss';
+import { RootState } from 'src/store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import handlePlaceSelected from './Hooks';
+import { useCookies } from 'react-cookie';
 
-interface AutocompleteInputProps {
-  onPlaceSelected: (place: google.maps.places.PlaceResult) => void;
-}
-
-const AutocompleteInput: React.FC<AutocompleteInputProps> = ({ onPlaceSelected }) => {
+const AutocompleteInput: React.FC = () => {
   const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete | null>(null);
+  const { placeName } = useSelector((state: RootState) => state.place);
+  const dispatch = useDispatch();
+  const [, setPlaceIdCookie] = useCookies(['place_id']);
 
   const onLoad = (autocompleteInstance: google.maps.places.Autocomplete) => {
     setAutocomplete(autocompleteInstance);
@@ -16,7 +19,7 @@ const AutocompleteInput: React.FC<AutocompleteInputProps> = ({ onPlaceSelected }
   const onPlaceChanged = () => {
     if (autocomplete !== null) {
       const place = autocomplete.getPlace();
-      onPlaceSelected(place);
+      handlePlaceSelected(place, dispatch, setPlaceIdCookie);
     } else {
       console.log('Autocomplete is not loaded yet!');
     }
@@ -26,22 +29,20 @@ const AutocompleteInput: React.FC<AutocompleteInputProps> = ({ onPlaceSelected }
     <Autocomplete
       className='d-inline-block'
       onLoad={onLoad}
-      options={{fields: ["address_components", "geometry", "name"]}}
+      options={{fields: ["address_components", "geometry", "name", "place_id"]}}
       onPlaceChanged={onPlaceChanged}
     >
       <input
         type="text"
-        placeholder="Enter a Location"
+        placeholder={placeName ? placeName : "Enter a Location"}
         style={{
           display: 'inline-block',
-          //boxSizing: `border-box`,
-          border: `1px solid #ccc`,
+          border: `2px solid #f9703e`,
           borderRadius: '5px',
-          width: `200px`,
-          padding: `0 5px`,
-          //boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-          fontSize: `18px`,
-          outline: `none`,
+          width: `250px`,
+          padding: `8px 16px`,
+          outline: 'none',
+          fontSize: `20px`,
           textOverflow: `ellipses`,
         }}
       />

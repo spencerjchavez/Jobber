@@ -10,7 +10,7 @@ export interface UsersState {
 const initialUserProps: { [userId: number]: UserProps} = {
     1: {
         userId: 1,
-        name: 'Stacy Williams',
+        name: 'Karen',
         profilePicture: 'https://qph.cf2.quoracdn.net/main-qimg-6f8532751ceb198802a5a438cb5c634e-lq'
     }
 };

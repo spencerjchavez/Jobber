@@ -1,7 +1,7 @@
 import ContractorRatingsProps from "src/global-types/ContractorRatingsProps";
 import React from 'react'
-import StarFilled from '../../assets/star-filled.svg?react';
-import StarOutline from '../../assets/star-outline.svg?react';
+import StarFilled from '../../assets/icons/star-filled.svg?react';
+import StarOutline from '../../assets/icons/star-outline.svg?react';
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "src/store/store";
@@ -43,8 +43,11 @@ const CondensedVertical: React.FC<Props> = (props) => {
         </div>
         <Link to={`/contractor/${props.contractorId}#reviews`}>
             { props.ratings.length > 0
-                ? `${props.avgStars}/5 stars from ${props.ratings.length} reviews` 
-                : `No Reviews Yet`}
+                ? <>
+                    <p className="mb-0">{props.avgStars}/5 stars</p>
+                    <p className="mb-0">from {props.ratings.length} reviews</p>
+                </>
+                : <p>No Reviews Yet</p>}
         </Link>
     </div>
 }

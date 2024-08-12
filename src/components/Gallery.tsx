@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import './Gallery.scss';
+import ImageWithOverlay from "./ImageWithOverlay";
 
 interface GalleryProps {
     images: string[];
+    gap?: number;
+    colsLg?: number;
+    colsSm?: number;
+    overlay?: string;
 }
 interface LoadedImage {
     element: React.ReactElement;
-    height: number;
+    aspectRatioInverse: number;
 }
 
-// 2 columns for small screens, otherwise 4
-const getColumnCount = () => window.innerWidth < 992 ? 2 : 4;
+const Gallery: React.FC<GalleryProps> = ({images, gap, colsLg = 4, colsSm = 2, overlay=''}) => {
 
-const Gallery: React.FC<GalleryProps> = ({images}) => {
-
+    const getColumnCount = () => window.innerWidth < 992 ? colsSm : colsLg;
     // track columns of gallery
     const [columnCount, setColumnCount] = useState(getColumnCount());
     const emptyColumns: LoadedImage[][] = Array.from({length: columnCount}, () => []);
@@ -36,21 +39,31 @@ const Gallery: React.FC<GalleryProps> = ({images}) => {
     // load image heights
     useEffect(() => {
         const loadImage = async (src: string): Promise<LoadedImage> => {
-          return new Promise((resolve) => {
+          return new Promise((resolve, reject) => {
             const img = new Image();
             img.src = src;
             img.onload = () => {
-              resolve({ 
-                element: <img src={src} alt = '' />,
-                height: img.height / img.width 
-            });
+                resolve({ 
+                    element: <ImageWithOverlay src={src} alt = '' className='mb-0' overlay={overlay}/>,
+                    aspectRatioInverse: img.height / img.width 
+                });
             };
+            img.onerror = () => {
+                reject(new Error(`Image with url: ${img.src} could not be loaded`))
+            }
           });
         };
     
         const loadAllImages = async () => {
-          const loadedImages = await Promise.all(images.map((src) => loadImage(src)));
-          setLoadedImages(loadedImages);
+          const loadedImagesResults = await Promise.allSettled(images.map((src) => loadImage(src)));
+            setLoadedImages(loadedImagesResults.reduce((carry, val) => {
+                if(val.status == 'fulfilled') {
+                    carry.push(val.value)
+                } else {
+                    console.log(val.reason);
+                }
+                return carry;
+            }, new Array<LoadedImage>()));
         };
     
         loadAllImages();
@@ -70,14 +83,14 @@ const Gallery: React.FC<GalleryProps> = ({images}) => {
                 }
             })
             columns[minCol].push(loadedImage);
-            columnHeights[minCol] += loadedImage.height;
+            columnHeights[minCol] += loadedImage.aspectRatioInverse;
         })
         setColumns(columns);
     }, [columnCount, loadedImages]);
 
-    return <div className="masonry-grid">
+    return <div className="masonry-grid" style={{gap: gap != null ? gap : '1em'}}>
         {columns.map((column, index) => {
-            return <div key={index} className="masonry-col">
+            return <div key={index} className="masonry-col" style={{gap: gap != null ? gap : '1em'}}>
                 {column.map((image, index2) => {
                     return <React.Fragment key={index2}>
                         {image.element}

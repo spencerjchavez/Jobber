@@ -1,5 +1,6 @@
+import Location from "src/features/locations/Location";
+
 export default interface ServiceAreaProps {
-    latitude: number;
-    longitude: number;
+    location: Location;
     radius: number; // in miles
 }

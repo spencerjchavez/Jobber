@@ -1,0 +1,32 @@
+@import 'src/theme-variables.scss';
+
+.hover-card{
+    position: relative;
+    overflow: hidden;
+}
+
+.hover-card > * {
+    transition: all 0s;
+    transition-delay: .1s;
+    position: relative;
+}
+
+.hover-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    aspect-ratio: 1;
+    background-color: $color-primary;
+    border-radius: 999px;
+    transition: all .2s ease-in-out;
+}
+.hover-card:hover::before {
+    width: 200%;
+}
+
+.hover-card:hover * {
+    color: white;
+}

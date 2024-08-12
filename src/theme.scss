@@ -46,7 +46,7 @@ h1{
 
 h2{
 	font-size: 41.89px * $text-size-multiplier;
-	font-weight: 900;
+	font-weight: 500;
 	letter-spacing: 2px;
 }
 
@@ -75,10 +75,10 @@ p.lead{
 }
 
 .small{
-	font-size: 11px * $text-size-multiplier;
+	font-size: 14px * $text-size-multiplier;
 }
 
-a {
+a:not(.fill, .btn) {
 	border-bottom: 1px solid $color-offwhite-darker;
 }
 
@@ -92,7 +92,7 @@ a {
 
 
 /* container styles */
-.bg-color-primary {
+.bg-color-primary:not(.row) {
 	background-color: $color-primary;
 }
 .bg-color-secondary {
@@ -110,10 +110,31 @@ a {
 .light, .light * {
 	color: $color-body;
 }
+.color-primary {
+	color: $color-primary;
+}
+.color-secondary {
+	color: $color-secondary;
+}
 
+.section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 .row {
 	position: relative;
 	align-items: start;
+	max-width: 1150px;
+	width: 100%;
+
+	& .row { // no gutters on nested rows
+		margin: 0;
+	}
+}
+
+.row.w-100 {
+	max-width: 100%;
 }
 
 .sticky {
@@ -123,13 +144,6 @@ a {
 	&.header {
 		top: 0
 	}
-}
-
-.color-primary {
-	color: $color-primary;
-}
-.color-secondary {
-	color: $color-secondary;
 }
 
 @media only screen and (min-width: 992px) {
@@ -171,6 +185,7 @@ img.rounded-circle {
 		margin-right: 10px;
 	}
 }
+
 .btn, a, .a {
 	cursor: pointer;
 	position: relative;
