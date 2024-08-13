@@ -15,6 +15,7 @@ import handlePlaceSelected from './features/locations/Hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './store/store';
 import WelcomePage from './features/welcome/WelcomePage';
+import Loading from './features/loading/Loading';
 
 
 function App() {
@@ -43,33 +44,40 @@ function App() {
 
     // Store / retrieve place id from cookies
     const [placeIdCookie, setPlaceIdCookie] = useCookies(['place_id']);
+    const [showLoading, setShowLoading] = useState(true);
     const [map, setMap] = useState<google.maps.Map | null>(null);
     const dispatch = useDispatch();
-    
+
     useEffect(() => { // gets place from cookie on init
-      if (!map) return;
       const placeId = placeIdCookie.place_id;
-      if (!placeId ) return;
+      if (!map) {
+        return
+      }
+      if (!placeId) {
+        setShowLoading(false);
+        return;
+      }
       const service = new window.google.maps.places.PlacesService(map);
       service.getDetails({ placeId }, (place, status) => {
           if (status === window.google.maps.places.PlacesServiceStatus.OK && place != null) {
               handlePlaceSelected(place, dispatch, setPlaceIdCookie);
           } else {
-          console.error('Place details request failed:', status);
+            console.error('Place details request failed:', status);
           }
+          setShowLoading(false);
       });
     }, [map]);
 
-    return (<div className="app">
-      {/* header */
+    return <div className="app">
+      {/* header */}
       <div className="row header sticky dark align-items-center">
         <div className="col-12 text-center">
           <Link className="fill" to={`/`} />
           <h2 className="m-0 alt-font">Jobber</h2>
         </div>
       </div>
-      }
-      <LoadScript googleMapsApiKey={secrets.maps_api_key} libraries={mapsLibrariesRef.current}>
+      
+      <LoadScript googleMapsApiKey={secrets.maps_api_key} libraries={mapsLibrariesRef.current} loadingElement={<Loading />}>
         {/*Dummy GoogleMap needed to get place from placeId cookie */}
         <GoogleMap
             id="map"
@@ -79,16 +87,20 @@ function App() {
                 setMap(map);
             }}
           />
-        <Routes>
-          <Route path='/' element={ location ? <ContractorSearch /> : <WelcomePage /> } />
-          <Route path='/contractor/:contractorId' element={<Contractor />}/>
-          <Route path='/contractor/:contractorId/get-in-touch' element={<GetInTouch />}/>
-          <Route path='/job-postings' element={<JobPostingsContainer />} />
-          <Route path='/job-post/:jobPostId' element={<JobPost />} />
-          <Route path='*' element={<ErrorPage />} />
-        </Routes>
+        {
+          showLoading
+          ? <Loading /> 
+          : <Routes>
+            <Route path='/' element={ location ? <ContractorSearch /> : <WelcomePage /> } />
+            <Route path='/contractor/:contractorId' element={<Contractor />}/>
+            <Route path='/contractor/:contractorId/get-in-touch' element={<GetInTouch />}/>
+            <Route path='/job-postings' element={<JobPostingsContainer />} />
+            <Route path='/job-post/:jobPostId' element={<JobPost />} />
+            <Route path='*' element={<ErrorPage />} />
+          </Routes>
+        }
       </LoadScript>
-    </div>)
+    </div>
 }
 
 export default App
