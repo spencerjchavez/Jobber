@@ -61,13 +61,14 @@ function App() {
     }, [map]);
 
     return (<div className="app">
-      {/* header */}
+      {/* header */
       <div className="row header sticky dark align-items-center">
         <div className="col-12 text-center">
           <Link className="fill" to={`/`} />
           <h2 className="m-0 alt-font">Jobber</h2>
         </div>
       </div>
+      }
       <LoadScript googleMapsApiKey={secrets.maps_api_key} libraries={mapsLibrariesRef.current}>
         {/*Dummy GoogleMap needed to get place from placeId cookie */}
         <GoogleMap

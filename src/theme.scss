@@ -121,6 +121,7 @@ a:not(.fill, .btn) {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	position: relative;
 }
 .row {
 	position: relative;

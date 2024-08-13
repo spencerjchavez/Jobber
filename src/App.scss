@@ -23,6 +23,6 @@ html {
   background: linear-gradient(170deg, #f15a24 0%, #ff7f50 100%);
 }
 
-.app > .section, .app > .row:not(.header) {
-  margin-top: $header-height;
+.header ~ * .h-100vh, .header ~ .h-100vh {
+  height: calc(100vh - $header-height);
 }

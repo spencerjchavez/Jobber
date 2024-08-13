@@ -31,7 +31,7 @@ const WelcomePage = () => {
         setIsCustomer(null);
     }
 
-    return <div className="section fill d-flex flex-column align-items-center justify-content-center">
+    return <div className="section align-items-center justify-content-center h-100vh">
         <div className="fill overflow-hidden">
             <Gallery images={bgImageURLs} aspectRatio={3/2} gap={0} colsLg={3} overlay={'rgba(0, 0, 0, .5)'}/>
         </div>
