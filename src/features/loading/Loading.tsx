@@ -1,4 +1,3 @@
-import { useSearchParams } from 'react-router-dom';
 import './Loading.scss';
 import LoadingIcon from 'src/assets/icons/loading.svg?react'
 import { useEffect, useState } from 'react';
