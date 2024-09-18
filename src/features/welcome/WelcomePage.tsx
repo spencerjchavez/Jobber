@@ -67,13 +67,13 @@ const WelcomePage = () => {
                         <div className="col-12 text-center">
                             <h2 className="alt-font mb-4">Find Great Contractors In Your Area:</h2>
                             <AutocompleteInput />
-                            <div className="pt-5"/>
+                            <div className="pt-3 pt-lg-5"/>
                             <a className="btn btn-simple btn-icon-arrow-left mb-0" onClick={handleClearIsContractor}>Go Back</a>
                         </div>
                     </div>
                 </>
                 }
-                <div className="pt-5" />
+                <div className="pt-3 pt-lg-5" />
             </div>
         </div>
     </div>
