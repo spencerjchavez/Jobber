@@ -21,10 +21,10 @@ const Contractor: React.FC = () => {
             <MainContainer
                 sidebarLeft={<>
                     <div className="row align-items-center">
-                        <div className="col-6 col-lg-12 text-center">
+                        <div className="col-12 col-lg-12 text-center">
                             <img className="img-fluid rounded-circle p-3" src={props.profilePicture} />
                         </div>
-                        <div className="col-6 col-lg-12 text-center">
+                        <div className="col-12 col-lg-12 text-center">
                             <h4>{props.name}</h4>        
                             { contractorRatings && <ContractorRatings type='condensed-vertical' {...contractorRatings}/> }
                             <a className="btn btn-standard color-primary uppercase w-100">Get in Touch</a>
