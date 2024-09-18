@@ -36,7 +36,7 @@ const WelcomePage = () => {
             <Gallery images={bgImageURLs} aspectRatio={3/2} gap={0} colsLg={3} overlay={'rgba(0, 0, 0, .5)'}/>
         </div>
         <div className="row justify-content-center">
-            <div className="col-9 p-2 p-lg-5 bg-white shadow-lg">
+            <div className="col-10 p-2 p-lg-5 bg-white shadow-lg">
                 <div className="pt-5" />
                 { // STEP 1: user selects either customer or contractor side
                 isCustomer == null && <> 
@@ -47,13 +47,13 @@ const WelcomePage = () => {
                     </div>
                     <div className="row g-5 justify-content-center">
                         <div className="col-12 col-lg-6">
-                            <HoverCard className="p-5 text-center">
+                            <HoverCard className="p-2 p-lg-5 text-center">
                                 <h4 className="mb-0">I'm a Customer</h4>
                                 <a className="fill" onClick={handleIsCustomer} />
                             </HoverCard>
                         </div>
                         <div className="col-12 col-lg-6">
-                            <HoverCard className="p-5 text-center">
+                            <HoverCard className="p-2 p-lg-5 text-center">
                                 <h4 className="mb-0">I'm a Contractor</h4>
                                 <a className="fill" onClick={handleIsContractor} />
                             </HoverCard>
