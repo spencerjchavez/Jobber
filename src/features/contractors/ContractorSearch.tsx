@@ -23,29 +23,29 @@ const ContractorSearch: React.FC = () => {
             })}
         </div>}
         mainContent={<div className="row">
-            <div className="col-12">
-                {Array.from(Object.values(contractorProps)).map((contractorProps) => {
-                    let show = false;
-                    if(location) { 
-                        const distanceMiles = getDistance(contractorProps.serviceArea.location, location) / 1609.34;
-                        if (distanceMiles < contractorProps.serviceArea.radius) {
-                            const isJobCategoryFilterEmpty = () => {
-                                return !Object.values(jobCategoryFilter).reduce((prev, jobCategory) => jobCategory || prev, false);
-                            };
-                            if(isJobCategoryFilterEmpty()) {
-                                show = true;
-                            } else {
-                                contractorProps.jobCategories.forEach((jobCategory) => {
-                                    if(jobCategoryFilter[jobCategory]) {
-                                        show = true;
-                                    }
-                                })
-                            }
+            {Array.from(Object.values(contractorProps)).map((contractorProps) => {
+                let show = false;
+                if(location) { 
+                    const distanceMiles = getDistance(contractorProps.serviceArea.location, location) / 1609.34;
+                    if (distanceMiles < contractorProps.serviceArea.radius) {
+                        const isJobCategoryFilterEmpty = () => {
+                            return !Object.values(jobCategoryFilter).reduce((prev, jobCategory) => jobCategory || prev, false);
+                        };
+                        if(isJobCategoryFilterEmpty()) {
+                            show = true;
+                        } else {
+                            contractorProps.jobCategories.forEach((jobCategory) => {
+                                if(jobCategoryFilter[jobCategory]) {
+                                    show = true;
+                                }
+                            })
                         }
                     }
-                    return show && <ContractorListItem key={contractorProps.contractorId} {...contractorProps} />;
-                })}
-            </div>
+                }
+                return show && <div className="col-12">
+                    <ContractorListItem key={contractorProps.contractorId} {...contractorProps} />
+                </div>;
+            })}
         </div>} />
     </div>
 }

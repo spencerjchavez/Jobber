@@ -1,3 +1,1 @@
-- Custom scroll bar
-- Button styling
-- 
+- Contractor Page: Add option for custom content for each service that a contrcator provides. This information can be displayed in tabs with one tab for each service.

@@ -16,7 +16,7 @@ const ContractorListItem : React.FC<ContractorProps> = (props) => {
         <div className="col-8 col-lg-10">
             <h3 className="d-inline-block">{props.name}</h3>
             <p>{props.specialty}</p>
-            <Link className="btn btn-standard color-primary" to={`/contractor/${props.contractorId}/get-in-touch`}>Get In Touch</Link>
+            <Link className="btn btn-standard color-primary" to={`/contractor/${props.contractorId}#contact`}>Get In Touch</Link>
             <Link to={`/contractor/${props.contractorId}#portfolio`} className="btn btn-simple color-primary btn-icon-arrow-right">View Portfolio</Link>
         </div>
     </div>

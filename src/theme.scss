@@ -81,7 +81,9 @@ p.lead{
 a:not(.fill, .btn) {
 	border-bottom: 1px solid $color-offwhite-darker;
 }
-
+s {
+	text-decoration: none;
+}
 .uppercase {
 	text-transform: uppercase;
 }
@@ -116,6 +118,9 @@ a:not(.fill, .btn) {
 .color-secondary {
 	color: $color-secondary;
 }
+.color-warn {
+	color: red;
+}
 
 .section {
 	display: flex;
@@ -126,11 +131,11 @@ a:not(.fill, .btn) {
 .row {
 	position: relative;
 	align-items: start;
-	max-width: 1150px;
+	max-width: 1350px;
 	width: 100%;
 
 	& .row { // no gutters on nested rows
-		margin: 0;
+		//margin: 0;
 	}
 }
 
@@ -295,5 +300,16 @@ p > a, p > .a {
 
 	&:hover::after {
 		margin-right: -4px;
+	}
+}
+
+/* Forms */
+.form-primary {
+	& * {
+		text-align: left;
+	}
+
+	& .input-multiline-medium {
+		
 	}
 }

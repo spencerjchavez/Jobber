@@ -5,6 +5,7 @@ import ErrorPage from "../ErrorPage";
 import MainContainer from "../../components/MainContainer";
 import ContractorRatings from "../ratings/ContractorRatings";
 import Gallery from "src/components/Gallery";
+import SimpleContactForm from "../forms/SimpleContactForm";
 
 const Contractor: React.FC = () => {
     const params = useParams();
@@ -27,7 +28,7 @@ const Contractor: React.FC = () => {
                         <div className="col-12 col-lg-12 text-center">
                             <h4>{props.name}</h4>        
                             { contractorRatings && <ContractorRatings type='condensed-vertical' {...contractorRatings}/> }
-                            <a className="btn btn-standard color-primary uppercase w-100">Get in Touch</a>
+                            <a href="#contact" className="btn btn-standard color-primary uppercase w-100">Get in Touch</a>
                             <a className="btn btn-outline color-primary uppercase w-100">Leave a Review</a>
                         </div>
                     </div>
@@ -50,8 +51,10 @@ const Contractor: React.FC = () => {
                             <li>Could be a list of locations lirovided by the contractor</li>
                             <li>Could just show the city the contractor is based out of?</li>
                             </ul>
-                            <h4 id="reviews" className="mt-5">Client Reviews</h4>
+                            <h4 id="reviews" className="mt-5">Reviews</h4>
                             { contractorRatings && <ContractorRatings type='large' {...contractorRatings}/> }
+                            <h4 id="contact">Get A Quote</h4>
+                            <SimpleContactForm />
                         </div>
                     </div>
                 </>}

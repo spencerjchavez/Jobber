@@ -1,3 +1,4 @@
+import FormProps from "./FormProps";
 import ServiceAreaProps from "./ServiceAreaProps";
 
 export default interface ContractorProps {
@@ -10,4 +11,5 @@ export default interface ContractorProps {
     portfolioImages: string[];
     services: string[];
     about: string;
+    contactForm: FormProps;
 }

@@ -44,8 +44,7 @@ const CondensedVertical: React.FC<Props> = (props) => {
         <Link to={`/contractor/${props.contractorId}#reviews`}>
             { props.ratings.length > 0
                 ? <>
-                    <p className="mb-0">{props.avgStars}/5 stars</p>
-                    <p className="mb-0">from {props.ratings.length} reviews</p>
+                    <p>{props.ratings.length} reviews</p>
                 </>
                 : <p>No Reviews Yet</p>}
         </Link>

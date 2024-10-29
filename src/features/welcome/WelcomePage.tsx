@@ -66,7 +66,11 @@ const WelcomePage = () => {
                     <div className="row">
                         <div className="col-12 text-center">
                             <h2 className="alt-font mb-4">Find Great Contractors In Your Area:</h2>
-                            <AutocompleteInput />
+                            <div className="d-flex flex-row align-items-stretch justify-content-center" style={{gap: '1em'}}>
+                                <a className="btn btn-color-primary btn-standard mb-0" href="#">Use Current Location</a> {/*TODO: add map icon*/}
+                                <AutocompleteInput />
+                            </div>
+                            
                             <div className="pt-3 pt-lg-5"/>
                             <a className="btn btn-simple btn-icon-arrow-left mb-0" onClick={handleClearIsContractor}>Go Back</a>
                         </div>
