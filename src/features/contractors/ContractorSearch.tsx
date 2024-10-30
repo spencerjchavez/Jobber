@@ -42,8 +42,8 @@ const ContractorSearch: React.FC = () => {
                         }
                     }
                 }
-                return show && <div className="col-12">
-                    <ContractorListItem key={contractorProps.contractorId} {...contractorProps} />
+                return show && <div key={contractorProps.contractorId}  className="col-12">
+                    <ContractorListItem {...contractorProps} />
                 </div>;
             })}
         </div>} />

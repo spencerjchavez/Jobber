@@ -3,6 +3,7 @@ import jobPostsReducer from './jobPostsSlice';
 import contractorReducer from './contractorsSlice';
 import usersReducer from './usersSlice';
 import placeReducer from './placeSlice';
+import systemMessageQueueReducer from './systemMessageQueueSlice';
 
 export const store = configureStore({
   reducer: combineReducers({
@@ -10,6 +11,7 @@ export const store = configureStore({
     contractors: contractorReducer,
     users: usersReducer,
     place: placeReducer,
+    systemMessageQueue: systemMessageQueueReducer,
   })
 });
 

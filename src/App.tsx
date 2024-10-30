@@ -15,90 +15,92 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './store/store';
 import WelcomePage from './features/welcome/WelcomePage';
 import Loading from './features/loading/Loading';
+import SystemMessageQueue from './features/system-message-queue/SystemMessageQueue';
 
 
 function App() {
 
-    const mapsLibrariesRef = useRef<Library[]>(['places']);
-    const { hash, pathname } = useLocation();
-    const { location } = useSelector((state: RootState) => state.place);
-    
-    // scroll to top on url change
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, [pathname]);
-    
-    // scroll to hash
-    useLayoutEffect(() => {
-      if (hash) {
-        const scrollToElement = () => {
-          const element = document.getElementById(hash.substring(1));
-          if (element) {
-            element.scrollIntoView({ block: 'center', inline: 'center', behavior: 'smooth' });
-          }
+  const mapsLibrariesRef = useRef<Library[]>(['places']);
+  const { hash, pathname } = useLocation();
+  const { location } = useSelector((state: RootState) => state.place);
+
+  // scroll to top on url change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  // scroll to hash
+  useLayoutEffect(() => {
+    if (hash) {
+      const scrollToElement = () => {
+        const element = document.getElementById(hash.substring(1));
+        if (element) {
+          element.scrollIntoView({ block: 'center', inline: 'center', behavior: 'smooth' });
         }
-        setTimeout(scrollToElement, 100);
       }
-    }, [hash]);
+      setTimeout(scrollToElement, 100);
+    }
+  }, [hash]);
 
-    // Store / retrieve place id from cookies
-    const [placeIdCookie, setPlaceIdCookie] = useCookies(['place_id']);
-    const [showLoading, setShowLoading] = useState(true);
-    const [map, setMap] = useState<google.maps.Map | null>(null);
-    const dispatch = useDispatch();
+  // Store / retrieve place id from cookies
+  const [placeIdCookie, setPlaceIdCookie] = useCookies(['place_id']);
+  const [showLoading, setShowLoading] = useState(true);
+  const [map, setMap] = useState<google.maps.Map | null>(null);
+  const dispatch = useDispatch();
 
-    useEffect(() => { // gets place from cookie on init
-      const placeId = placeIdCookie.place_id;
-      if (!map) {
-        return
+  useEffect(() => { // gets place from cookie on init
+    const placeId = placeIdCookie.place_id;
+    if (!map) {
+      return
+    }
+    if (!placeId) {
+      setShowLoading(false);
+      return;
+    }
+    const service = new window.google.maps.places.PlacesService(map);
+    service.getDetails({ placeId }, (place, status) => {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK && place != null) {
+        handlePlaceSelected(place, dispatch, setPlaceIdCookie);
+      } else {
+        console.error('Place details request failed:', status);
       }
-      if (!placeId) {
-        setShowLoading(false);
-        return;
-      }
-      const service = new window.google.maps.places.PlacesService(map);
-      service.getDetails({ placeId }, (place, status) => {
-          if (status === window.google.maps.places.PlacesServiceStatus.OK && place != null) {
-              handlePlaceSelected(place, dispatch, setPlaceIdCookie);
-          } else {
-            console.error('Place details request failed:', status);
-          }
-          setShowLoading(false);
-      });
-    }, [map]);
+      setShowLoading(false);
+    });
+  }, [map]);
 
-    return <div className="app">
-      {/* header */}
-      <div className="row header sticky dark align-items-center">
-        <div className="col-12 text-center">
-          <Link className="fill" to={`/`} />
-          <h2 className="m-0 alt-font">Jobber</h2>
-        </div>
+  return <div className="app">
+    {/* header */}
+    <div className="row header sticky dark align-items-center">
+      <div className="col-12 text-center">
+        <Link className="fill" to={`/`} />
+        <h2 className="m-0 alt-font">Jobber</h2>
       </div>
-      
-      <LoadScript googleMapsApiKey={secrets.maps_api_key} libraries={mapsLibrariesRef.current} loadingElement={<Loading />}>
-        {/*Dummy GoogleMap needed to get place from placeId cookie */}
-        <GoogleMap
-            id="map"
-            zoom={1}
-            center={{lat: 0, lng: 0}}
-            onLoad={(map) => {
-                setMap(map);
-            }}
-          />
-        {
-          showLoading
-          ? <Loading /> 
+    </div>
+
+    <LoadScript googleMapsApiKey={secrets.maps_api_key} libraries={mapsLibrariesRef.current} loadingElement={<Loading />}>
+      {/*Dummy GoogleMap needed to get place from placeId cookie */}
+      <GoogleMap
+        id="map"
+        zoom={1}
+        center={{ lat: 0, lng: 0 }}
+        onLoad={(map) => {
+          setMap(map);
+        }}
+      />
+      <SystemMessageQueue />
+      {
+        showLoading
+          ? <Loading />
           : <Routes>
-            <Route path='/' element={ location ? <ContractorSearch /> : <WelcomePage /> } />
-            <Route path='/contractor/:contractorId' element={<Contractor />}/>
+            <Route path='/' element={location ? <ContractorSearch /> : <WelcomePage />} />
+            <Route path='/contractor/:contractorId' element={<Contractor />} />
             <Route path='/job-postings' element={<JobPostingsContainer />} />
             <Route path='/job-post/:jobPostId' element={<JobPost />} />
             <Route path='*' element={<ErrorPage />} />
           </Routes>
-        }
-      </LoadScript>
-    </div>
+      }
+    </LoadScript>
+  </div>
 }
 
 export default App

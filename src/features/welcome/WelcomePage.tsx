@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
+import { startPresenting, stopPresenting } from "src/store/systemMessageQueueSlice"
+import { setLocation } from "src/store/placeSlice";
 import Gallery from "src/components/Gallery";
 import HoverCard from "src/components/HoverCard";
 import AutocompleteInput from "../locations/AutocompleteInput";
@@ -14,6 +16,8 @@ import image8 from 'src/assets/images/compressed/8.jpg';
 import image9 from 'src/assets/images/compressed/9.jpg';
 import image10 from 'src/assets/images/compressed/10.jpg';
 import image11 from 'src/assets/images/compressed/11.jpg';
+import { useDispatch } from "react-redux";
+import SystemMessageProps from "../system-message-queue/SystemMessageProps";
 
 
 const WelcomePage = () => {
@@ -29,6 +33,27 @@ const WelcomePage = () => {
     }
     const handleClearIsContractor = () => {
         setIsCustomer(null);
+    }
+
+    const dispatch = useDispatch();
+
+    const handleUseCurrentLocation = () => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            const { latitude, longitude } = position.coords;
+            dispatch(setLocation({
+                latitude,
+                longitude
+            }));
+        }, () => {
+            const systemMessage: SystemMessageProps = {
+                level: 'error',
+                message: 'Current location unavailable. Please enter a location instead.'
+            };
+            dispatch(startPresenting(systemMessage));
+            setTimeout(() => {
+                dispatch(stopPresenting(systemMessage));
+            }, 10000)
+        });
     }
 
     return <div className="section align-items-center justify-content-center h-100vh">
@@ -67,7 +92,7 @@ const WelcomePage = () => {
                         <div className="col-12 text-center">
                             <h2 className="alt-font mb-4">Find Great Contractors In Your Area:</h2>
                             <div className="d-flex flex-row align-items-stretch justify-content-center" style={{gap: '1em'}}>
-                                <a className="btn btn-color-primary btn-standard mb-0" href="#">Use Current Location</a> {/*TODO: add map icon*/}
+                                <a className="btn btn-color-primary btn-standard mb-0" onClick={handleUseCurrentLocation}>Use Current Location</a> {/*TODO: add map icon*/}
                                 <AutocompleteInput />
                             </div>
                             
