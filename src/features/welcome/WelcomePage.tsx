@@ -18,6 +18,7 @@ import image10 from 'src/assets/images/compressed/10.jpg';
 import image11 from 'src/assets/images/compressed/11.jpg';
 import { useDispatch } from "react-redux";
 import SystemMessageProps from "../system-message-queue/SystemMessageProps";
+import { useCookies } from "react-cookie";
 
 
 const WelcomePage = () => {
@@ -36,14 +37,14 @@ const WelcomePage = () => {
     }
 
     const dispatch = useDispatch();
+    const [_, setLocationCookie] = useCookies(['location']);
 
     const handleUseCurrentLocation = () => {
         navigator.geolocation.getCurrentPosition((position) => {
             const { latitude, longitude } = position.coords;
-            dispatch(setLocation({
-                latitude,
-                longitude
-            }));
+            const location = {latitude, longitude};
+            dispatch(setLocation(location));
+            setLocationCookie('location', location, )
         }, () => {
             const systemMessage: SystemMessageProps = {
                 level: 'error',

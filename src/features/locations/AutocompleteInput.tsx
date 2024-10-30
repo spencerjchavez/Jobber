@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import { Autocomplete } from '@react-google-maps/api';
 import 'src/theme-variables.scss';
-import { RootState } from 'src/store/store';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import handlePlaceSelected from './Hooks';
 import { useCookies } from 'react-cookie';
 
 const AutocompleteInput: React.FC = () => {
   const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete | null>(null);
-  const { placeName } = useSelector((state: RootState) => state.place);
   const dispatch = useDispatch();
-  const [, setPlaceIdCookie] = useCookies(['place_id']);
+  const [, setLocationCookie] = useCookies(['location']);
 
   const onLoad = (autocompleteInstance: google.maps.places.Autocomplete) => {
     setAutocomplete(autocompleteInstance);
@@ -19,7 +17,7 @@ const AutocompleteInput: React.FC = () => {
   const onPlaceChanged = () => {
     if (autocomplete !== null) {
       const place = autocomplete.getPlace();
-      handlePlaceSelected(place, dispatch, setPlaceIdCookie);
+      handlePlaceSelected(place, dispatch, setLocationCookie);
     } else {
       console.log('Autocomplete is not loaded yet!');
     }
@@ -33,7 +31,7 @@ const AutocompleteInput: React.FC = () => {
     >
       <input
         type="text"
-        placeholder={placeName ? placeName : "Enter a Location"}
+        placeholder={"Enter a Location"}
         style={{
           border: `1px solid #f9703e`,
           width: `200px`,

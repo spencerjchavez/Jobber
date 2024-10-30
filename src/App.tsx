@@ -10,19 +10,22 @@ import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import { Library } from '@googlemaps/js-api-loader';
 import secrets from './assets/secrets';
 import { useCookies } from 'react-cookie';
-import handlePlaceSelected from './features/locations/Hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './store/store';
 import WelcomePage from './features/welcome/WelcomePage';
 import Loading from './features/loading/Loading';
 import SystemMessageQueue from './features/system-message-queue/SystemMessageQueue';
+import { setLocation } from './store/placeSlice';
 
 
 function App() {
 
   const mapsLibrariesRef = useRef<Library[]>(['places']);
   const { hash, pathname } = useLocation();
-  const { location } = useSelector((state: RootState) => state.place);
+  
+  const dispatch = useDispatch();
+  const [locationCookie, _] = useCookies(['location']);
+  const location = useSelector((state: RootState) => state.place.location );
 
   // scroll to top on url change
   useEffect(() => {
@@ -42,31 +45,16 @@ function App() {
     }
   }, [hash]);
 
-  // Store / retrieve place id from cookies
-  const [placeIdCookie, setPlaceIdCookie] = useCookies(['place_id']);
-  const [showLoading, setShowLoading] = useState(true);
-  const [map, setMap] = useState<google.maps.Map | null>(null);
-  const dispatch = useDispatch();
-
-  useEffect(() => { // gets place from cookie on init
-    const placeId = placeIdCookie.place_id;
-    if (!map) {
-      return
-    }
-    if (!placeId) {
-      setShowLoading(false);
-      return;
-    }
-    const service = new window.google.maps.places.PlacesService(map);
-    service.getDetails({ placeId }, (place, status) => {
-      if (status === window.google.maps.places.PlacesServiceStatus.OK && place != null) {
-        handlePlaceSelected(place, dispatch, setPlaceIdCookie);
-      } else {
-        console.error('Place details request failed:', status);
+  useEffect(() => {
+    if(!location) {
+      if(locationCookie.location) {
+        dispatch(setLocation(locationCookie.location));
       }
-      setShowLoading(false);
-    });
-  }, [map]);
+    }
+  }, [location])
+
+  // get location from cookie
+  const [map, setMap] = useState<google.maps.Map | null>(null);
 
   return <div className="app">
     {/* header */}
@@ -78,7 +66,7 @@ function App() {
     </div>
 
     <LoadScript googleMapsApiKey={secrets.maps_api_key} libraries={mapsLibrariesRef.current} loadingElement={<Loading />}>
-      {/*Dummy GoogleMap needed to get place from placeId cookie */}
+      {/*Dummy GoogleMap needed to for Autocomplete component */}
       <GoogleMap
         id="map"
         zoom={1}
@@ -89,15 +77,15 @@ function App() {
       />
       <SystemMessageQueue />
       {
-        showLoading
-          ? <Loading />
-          : <Routes>
+        location ? 
+          <Routes>
             <Route path='/' element={location ? <ContractorSearch /> : <WelcomePage />} />
             <Route path='/contractor/:contractorId' element={<Contractor />} />
             <Route path='/job-postings' element={<JobPostingsContainer />} />
             <Route path='/job-post/:jobPostId' element={<JobPost />} />
             <Route path='*' element={<ErrorPage />} />
           </Routes>
+        : <WelcomePage />
       }
     </LoadScript>
   </div>
