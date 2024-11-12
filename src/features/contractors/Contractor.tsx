@@ -5,7 +5,7 @@ import ErrorPage from "../ErrorPage";
 import MainContainer from "../../components/MainContainer";
 import ContractorRatings from "../ratings/ContractorRatings";
 import Gallery from "src/components/Gallery";
-import SimpleContactForm from "../forms/SimpleContactForm";
+import Form from "../forms/Form";
 
 const Contractor: React.FC = () => {
     const params = useParams();
@@ -54,7 +54,7 @@ const Contractor: React.FC = () => {
                             <h4 id="reviews" className="mt-5">Reviews</h4>
                             { contractorRatings && <ContractorRatings type='large' {...contractorRatings}/> }
                             <h4 id="contact">Get A Quote</h4>
-                            <SimpleContactForm />
+                            <Form {...props.contactForm} />
                         </div>
                     </div>
                 </>}

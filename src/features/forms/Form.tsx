@@ -1,9 +1,7 @@
 import FormProps from "src/global-types/FormProps";
-import './Form.scss';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FormField from "./form-fields/FormField";
 import { Form as BootstrapForm, Button } from 'react-bootstrap';
-import { propTypes } from "react-bootstrap/esm/Image";
 
 const Form: React.FC<FormProps> = (formProps) => {
 

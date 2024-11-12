@@ -1,13 +1,10 @@
-import './Form.scss';
-import Form from "./Form";
-import FormFieldType from "src/global-types/FormFieldType";
+import FormFieldType from 'src/global-types/FormFieldType';
 import { telPattern } from './form-fields/InputPatterns';
+import FormProps from 'src/global-types/FormProps';
 
-const SimpleContactForm: React.FC = () => {
-    
-    return <Form 
-        userId={1}
-        fields={[
+const simpleContactFormProps: FormProps = {
+        userId: 1,
+        fields: [
             {
                 formFieldType: FormFieldType.SingleLineInput,
                 data: {
@@ -60,11 +57,11 @@ const SimpleContactForm: React.FC = () => {
                     size: "medium",
                 },
                 required: true,
-                name: "phone",
+                name: "projectDescription",
                 errorElement: <p>Fix this you fool</p>,
             }
-        ]} 
-        submitButtonText={"Get A Quote"} />
+        ],
+        submitButtonText: "Get A Quote"
 }
 
-export default SimpleContactForm;
+export default simpleContactFormProps;

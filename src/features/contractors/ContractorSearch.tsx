@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/store/store";
 import ContractorListItem from "./ContractorListItem";
 import { getDistance } from "geolib";
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
-import secrets from 'src/assets/secrets';
+import { GoogleMap, Marker } from '@react-google-maps/api';
 import Loading from '../loading/Loading';
 import { useRef, useState } from 'react';
 import { Library } from '@googlemaps/js-api-loader';
@@ -14,7 +13,7 @@ const ContractorSearch: React.FC = () => {
     const { location } = useSelector((state: RootState) => state.place);
     const mapsLibrariesRef = useRef<Library[]>(['places']);
     const [map, setMap] = useState<google.maps.Map | null>(null);
-
+    console.log(location);
     const dispatch = useDispatch();
 
     return <div className="section">
@@ -26,19 +25,30 @@ const ContractorSearch: React.FC = () => {
                         { /* map filters and preferences */ }
                     </div>
                     <div className="h-100">
-                        <GoogleMap
-                            id="contractors-map"
-                            mapContainerStyle={{
-                                width: '100%',
-                                height: '100%',
-                            }}
-                            zoom={1}
-                            center={{ lat: 0, lng: 0 }}
-                            onLoad={(map) => {
-                                console.log(map)
-                                setMap(map);
-                            }}
-                        />
+                        { location ?
+                            <GoogleMap
+                                id="contractors-map"
+                                mapContainerStyle={{
+                                    width: '100%',
+                                    height: '100%',
+                                }}
+                                zoom={12}
+                                center={{ lat: location.latitude, lng: location.longitude }}
+                                onLoad={(map) => {
+                                    console.log(map)
+                                    setMap(map);
+                                }}
+                            >
+                                {
+                                    location && Object.values(contractorProps).map((props) => {
+                                        return <Marker 
+                                            position={{lat: location.latitude, lng: location.longitude}}
+                                            key={props.contractorId} />
+                                    })
+                                }
+                            </GoogleMap>
+                            : <Loading />
+                        }
                     </div>
                 </div>
             </div>

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import simpleContactFormProps from 'src/features/forms/SimpleContactForm';
 import ContractorProps from 'src/global-types/ContractorProps';
 import ContractorRating from 'src/global-types/ContractorRating';
 import ContractorRatingsProps from 'src/global-types/ContractorRatingsProps';
@@ -29,7 +30,8 @@ for(let i=0; i<20; i++) {
         profilePicture: 'https://www.shutterstock.com/image-photo/male-plumber-diagnoses-pipes-water-260nw-2358150009.jpg',
         portfolioImages: ['https://wentworthplumbing.ca/wp-content/uploads/2019/02/industrialplumbingpipes-800x450.jpg', 'https://trusteyman.com/wp-content/uploads/2020/07/commercial-plumber-1-1024x683.jpeg', 'https://i.redd.it/bj89ble82m5a1.jpg', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqYv6qIVUeE4xz4sSJfYTLLzy3BB_HHFegqA&s', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPbZtS_qJrmz1uh7evMzDLT700m1ZNt6YYcw&s', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzKz21h6nx_xn_lq_zTTzrULJHgLM3M9H7IA&s', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTpy6un9wKIJCsuRaxrkpIJhGt_JXxT0-oqw&s', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTpy6un9wKIJCsuRaxrkpIJhGt_JXxT0-oqw&s', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp0KTZd0RnLjjTx9tOrGo1caUxjY9I-srVLQ&s'],
         services: ['Plumbing Repair', 'Plumbing Installation', 'Emergency Plumbing'],
-        about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        about: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        contactForm: simpleContactFormProps
     }
 
     const ratings = Array.from({length: 10}).map(() => {
