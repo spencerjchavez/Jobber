@@ -6,6 +6,6 @@ export default interface FormFieldProps {
     name: string;
     data: any;
     required?: boolean;
-    errorElement?: ReactNode;
+    errorMessage?: string;
     colClassName?: string;
 }

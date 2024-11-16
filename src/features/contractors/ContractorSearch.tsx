@@ -3,18 +3,41 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/store/store";
 import ContractorListItem from "./ContractorListItem";
 import { getDistance } from "geolib";
-import { GoogleMap, Marker } from '@react-google-maps/api';
 import Loading from '../loading/Loading';
-import { useRef, useState } from 'react';
-import { Library } from '@googlemaps/js-api-loader';
+import { Map, AdvancedMarker, MapCameraChangedEvent, AdvancedMarkerAnchorPoint } from '@vis.gl/react-google-maps';
+import { useEffect, useState } from 'react';
+import ContractorMapPin from './ContractorMapPin';
+import ContractorProps from 'src/global-types/ContractorProps';
+import { EmptyContractorRatings } from 'src/global-types/ContractorRatingsProps';
+
+interface LatLng {
+    lat: number;
+    lng: number;
+}
 
 const ContractorSearch: React.FC = () => {
     const { contractorProps, jobCategoryFilter } = useSelector((state: RootState) => state.contractors);
     const { location } = useSelector((state: RootState) => state.place);
-    const mapsLibrariesRef = useRef<Library[]>(['places']);
-    const [map, setMap] = useState<google.maps.Map | null>(null);
-    console.log(location);
+    const [ center, setCenter] = useState<LatLng>({lat: 0, lng: 0});
+    const [ zoom, setZoom] = useState(12);
+    const ratingsByContractorId = useSelector((state: RootState) => state.contractors.contractorRatings);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (location != null) {
+            setCenter({ lat: location.latitude, lng: location.longitude });
+        }
+    }, [location]);
+
+    const handleCameraChanged = (ev: MapCameraChangedEvent) => {
+        setCenter(ev.detail.center);
+        setZoom(ev.detail.zoom);
+    }
+    
+    const handleMapMarkerClicked = (contractorProps: ContractorProps) => {
+        console.log(contractorProps)
+    }
+
 
     return <div className="section">
         <div className="row">
@@ -26,27 +49,30 @@ const ContractorSearch: React.FC = () => {
                     </div>
                     <div className="h-100">
                         { location ?
-                            <GoogleMap
+                            <Map
                                 id="contractors-map"
-                                mapContainerStyle={{
+                                mapId="contractors-map"
+                                style={{
                                     width: '100%',
                                     height: '100%',
                                 }}
-                                zoom={12}
-                                center={{ lat: location.latitude, lng: location.longitude }}
-                                onLoad={(map) => {
-                                    console.log(map)
-                                    setMap(map);
-                                }}
+                                zoom={zoom}
+                                center={center}
+                                onCameraChanged={handleCameraChanged}
                             >
                                 {
                                     location && Object.values(contractorProps).map((props) => {
-                                        return <Marker 
-                                            position={{lat: location.latitude, lng: location.longitude}}
-                                            key={props.contractorId} />
+                                        return <AdvancedMarker
+                                            position={{lat: props.serviceArea.location.latitude, lng: props.serviceArea.location.longitude}}
+                                            key={props.contractorId}
+                                            title={props.name}
+                                            onClick={() => handleMapMarkerClicked(props)}
+                                            anchorPoint={AdvancedMarkerAnchorPoint.BOTTOM_LEFT}>
+                                                <ContractorMapPin {...props} zoom={zoom} {...(ratingsByContractorId[props.contractorId] ?? EmptyContractorRatings)}/>
+                                            </AdvancedMarker>
                                     })
                                 }
-                            </GoogleMap>
+                            </Map>
                             : <Loading />
                         }
                     </div>

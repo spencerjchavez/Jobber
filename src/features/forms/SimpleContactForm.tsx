@@ -13,7 +13,7 @@ const simpleContactFormProps: FormProps = {
                 },
                 required: true,
                 name: "firstName",
-                errorElement: <p>Fix this you fool</p>,
+                errorMessage: 'Fix this you fool',
                 colClassName: 'col-6',
             },
             {
@@ -24,7 +24,7 @@ const simpleContactFormProps: FormProps = {
                 },
                 required: true,
                 name: "lastName",
-                errorElement: <p>Fix this you fool</p>,
+                errorMessage: 'Fix this you fool',
                 colClassName: 'col-6'
             },
             {
@@ -35,7 +35,7 @@ const simpleContactFormProps: FormProps = {
                 },
                 required: true,
                 name: "email",
-                errorElement: <p>Fix this you fool</p>,
+                errorMessage: 'Fix this you fool',
                 colClassName: 'col-6'
             },
             {
@@ -46,7 +46,7 @@ const simpleContactFormProps: FormProps = {
                     pattern: telPattern,
                 },
                 name: "phone",
-                errorElement: <p>Fix this you fool</p>,
+                errorMessage: 'Fix this you fool',
                 colClassName: 'col-6'
             },
             {
@@ -58,7 +58,7 @@ const simpleContactFormProps: FormProps = {
                 },
                 required: true,
                 name: "projectDescription",
-                errorElement: <p>Fix this you fool</p>,
+                errorMessage: 'Fix this you fool',
             }
         ],
         submitButtonText: "Get A Quote"

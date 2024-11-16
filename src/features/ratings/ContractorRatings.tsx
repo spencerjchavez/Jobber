@@ -7,12 +7,15 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/store/store";
 
 interface Props extends ContractorRatingsProps {
-    type: string;
+    type: 'stars-only' | 'condensed-vertical' | 'large';
+    className: string;
 }
 
 const ContractorRatings: React.FC<Props> = (props) => {
 
     switch(props.type) {
+        case 'stars-only':
+            return <StarsOnly {...props} />
         case 'condensed-vertical':
             return <CondensedVertical {...props} />
         case 'large':
@@ -36,8 +39,14 @@ const getStarElements = (stars: number) => {
     </>
 }
 
+const StarsOnly: React.FC<Props> = (props) => {
+    return <div className={"d-flex justify-content-center pb-2 " + props.className}>
+        {getStarElements(props.avgStars)}
+    </div>
+}
+
 const CondensedVertical: React.FC<Props> = (props) => {
-    return <div className="d-flex flex-column text-center mb-3">
+    return <div className={"d-flex flex-column text-center mb-3 " + props.className}>
         <div className="d-flex justify-content-center pb-2">
             {getStarElements(props.avgStars)}
         </div>
@@ -54,7 +63,7 @@ const CondensedVertical: React.FC<Props> = (props) => {
 const Large: React.FC<Props> = (props) => {
     const userProps = useSelector((state: RootState) => state.users.userProps);
 
-    return <div className="row g-0">
+    return <div className={"row g-0 " + props.className}>
         {props.ratings.map((rating, i) => {
             const user = userProps[rating.authorUserId];
             if (!user) {

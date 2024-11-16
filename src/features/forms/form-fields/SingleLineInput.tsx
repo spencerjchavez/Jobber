@@ -13,7 +13,7 @@ const SingleLineInput: React.FC<TextInputProps & FormFieldValidatedProps> = (pro
             type={props.type ?? "text"}
             pattern={props.pattern}
             placeholder={props.placeholder ?? ''} />
-        <BootstrapForm.Control.Feedback type="invalid">{props.errorElement}</BootstrapForm.Control.Feedback>
+        <BootstrapForm.Control.Feedback type="invalid">{props.errorMessage}</BootstrapForm.Control.Feedback>
     </BootstrapForm.Group>
 }
 

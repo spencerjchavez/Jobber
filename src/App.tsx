@@ -6,8 +6,6 @@ import ContractorSearch from './features/contractors/ContractorSearch'
 import ErrorPage from './features/ErrorPage';
 import Contractor from './features/contractors/Contractor';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
-import { Library } from '@googlemaps/js-api-loader';
 import secrets from './assets/secrets';
 import { useCookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,11 +14,12 @@ import WelcomePage from './features/welcome/WelcomePage';
 import Loading from './features/loading/Loading';
 import SystemMessageQueue from './features/system-message-queue/SystemMessageQueue';
 import { setLocation } from './store/placeSlice';
+import { APIProvider, useApiLoadingStatus, APILoadingStatus, Map } from '@vis.gl/react-google-maps';
 
 
 function App() {
 
-  const mapsLibrariesRef = useRef<Library[]>(['places']);
+  const mapsLibraries = ['places'];
   const { hash, pathname } = useLocation();
   
   const dispatch = useDispatch();
@@ -52,9 +51,8 @@ function App() {
       }
     }
   }, [location])
-
-  // get location from cookie
-  const [map, setMap] = useState<google.maps.Map | null>(null);
+  
+  const status = useApiLoadingStatus();
 
   return <div className="app">
     {/* header */}
@@ -65,16 +63,17 @@ function App() {
       </div>
     </div>
 
-    <LoadScript googleMapsApiKey={secrets.maps_api_key} libraries={mapsLibrariesRef.current} loadingElement={<Loading />}>
+    
+    <APIProvider apiKey={secrets.maps_api_key} libraries={mapsLibraries}>
       {/*Dummy GoogleMap needed to for Autocomplete component */}
-      <GoogleMap
-        id="map"
-        zoom={1}
-        center={{ lat: 0, lng: 0 }}
-        onLoad={(map) => {
-          setMap(map);
-        }}
-      />
+      { 
+        status == APILoadingStatus.LOADING 
+        ? <Loading /> 
+        : <Map
+          id="parent-map"
+          zoom={1}
+          center={{ lat: 0, lng: 0 }} />
+      }
       <SystemMessageQueue />
       {
         location ? 
@@ -87,7 +86,7 @@ function App() {
           </Routes>
         : <WelcomePage />
       }
-    </LoadScript>
+    </APIProvider>
   </div>
 }
 

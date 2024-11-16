@@ -15,7 +15,7 @@ const MultiLineInput: React.FC<MultiLineInputProps & FormFieldValidatedProps> = 
             pattern={props.pattern}
             placeholder={props.placeholder ?? ''} 
             rows={props.size == 'large' ? 10 : props.size == 'medium' ? 6 : 3} />
-        <BootstrapForm.Control.Feedback type="invalid">{props.errorElement}</BootstrapForm.Control.Feedback>
+        <BootstrapForm.Control.Feedback type="invalid">{props.errorMessage}</BootstrapForm.Control.Feedback>
     </BootstrapForm.Group>
 }
 

@@ -1,0 +1,55 @@
+@import 'src/theme-variables';
+$img-size-lg: 60px;
+$img-size-sm: 40px;
+$border-size: 3px;
+
+.contractor-map-pin-wrapper {
+    position: relative;
+    display: grid;
+    transition: .2s ease-out margin;
+
+    &:hover {
+        margin-bottom: 1em;
+    }
+
+    & > .text-wrapper {
+        padding: 1em;
+        margin-left: calc(.5 * $img-size-lg + 1em);
+        padding-left: calc(.5 * $img-size-lg + 2em);
+        margin-top: calc($border-size);
+        height: $img-size-lg;
+        display: flex;
+        align-items: center;
+        text-align: left;
+        grid-row-start: 1;
+        grid-column-start: 1;
+    }
+
+    & > img {
+        object-fit: cover;
+        margin-top: $border-size; 
+        margin-left: $border-size;
+        width: $img-size-lg;
+        height: $img-size-lg;
+        grid-row-start: 1;
+        grid-column-start: 1;
+        z-index: 1
+    }
+
+    &.small > img {
+        width: $img-size-sm;
+        height: $img-size-sm;
+    }
+
+    & > .contractor-map-pin {
+        width: calc($img-size-lg + 2 * $border-size);
+        grid-row-start: 1;
+        grid-column-start: 1;
+        color: $color-secondary;
+        filter: drop-shadow(0 .5rem 1rem rgba(0,0,0,.35));
+    }
+
+    &.small > .contractor-map-pin {
+        width: calc($img-size-sm + 2 * $border-size);
+    }
+}
