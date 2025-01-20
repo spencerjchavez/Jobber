@@ -1,6 +1,6 @@
 import './ContractorSearch.scss';
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "src/store/store";
+import { AppDispatch, RootState } from "src/store/store";
 import ContractorListItem from "./ContractorListItem";
 import { getDistance } from "geolib";
 import Loading from '../loading/Loading';
@@ -9,46 +9,53 @@ import { useEffect, useState } from 'react';
 import ContractorMapPin from './ContractorMapPin';
 import ContractorProps from 'src/global-types/ContractorProps';
 import { EmptyContractorRatings } from 'src/global-types/ContractorRatingsProps';
-
-interface LatLng {
-    lat: number;
-    lng: number;
-}
+import Contractor from './Contractor';
+import { fetchContractorsThunk } from 'src/thunks/ContractorsThunk';
+import Coordinate from 'src/features/locations/Coordinate';
 
 const ContractorSearch: React.FC = () => {
     const { contractorProps, jobCategoryFilter } = useSelector((state: RootState) => state.contractors);
-    const { location } = useSelector((state: RootState) => state.place);
-    const [ center, setCenter] = useState<LatLng>({lat: 0, lng: 0});
+    const { clientCoordinate } = useSelector((state: RootState) => state.place);
+    const [ center, setCenter] = useState<Coordinate>({latitude: 0, longitude: 0});
     const [ zoom, setZoom] = useState(12);
+    const [ selectedContractor, setSelectedContractor] = useState<ContractorProps>();
     const ratingsByContractorId = useSelector((state: RootState) => state.contractors.contractorRatings);
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
-        if (location != null) {
-            setCenter({ lat: location.latitude, lng: location.longitude });
+        dispatch(fetchContractorsThunk({
+            searchCoordinates: center,
+            radius: 100
+        }));
+    }, [center])
+
+    useEffect(() => {
+        if (clientCoordinate != null) {
+            setCenter({ latitude: clientCoordinate.latitude, longitude: clientCoordinate.longitude });
         }
-    }, [location]);
+    }, [clientCoordinate]);
 
     const handleCameraChanged = (ev: MapCameraChangedEvent) => {
-        setCenter(ev.detail.center);
+        setCenter({latitude: ev.detail.center.lat, longitude: ev.detail.center.lng});
         setZoom(ev.detail.zoom);
     }
     
     const handleMapMarkerClicked = (contractorProps: ContractorProps) => {
-        console.log(contractorProps)
+        const clientCoordinate = contractorProps.serviceArea.location;
+        setCenter({latitude: clientCoordinate.latitude, longitude: clientCoordinate.longitude});
+        setSelectedContractor(contractorProps);
     }
 
-
     return <div className="section">
-        <div className="row">
-            <div className="col-12 col-lg-6 order-lg-2 h-100vh sticky p-0">
+        <div className="row g-0 w-100">
+            <div className="col-12 col-lg-8 h-100vh sticky p-0">
                 { /* contractor map */ }
                 <div className="d-flex flex-column h-100">
-                    <div className="p-2 d-flex flex-row g-2">
+                    <div className="p-0 d-flex flex-row g-2">
                         { /* map filters and preferences */ }
                     </div>
                     <div className="h-100">
-                        { location ?
+                        { clientCoordinate ?
                             <Map
                                 id="contractors-map"
                                 mapId="contractors-map"
@@ -57,11 +64,11 @@ const ContractorSearch: React.FC = () => {
                                     height: '100%',
                                 }}
                                 zoom={zoom}
-                                center={center}
+                                center={{lat: center.latitude, lng: center.longitude}}
                                 onCameraChanged={handleCameraChanged}
                             >
                                 {
-                                    location && Object.values(contractorProps).map((props) => {
+                                    clientCoordinate && Object.values(contractorProps).map((props) => {
                                         return <AdvancedMarker
                                             position={{lat: props.serviceArea.location.latitude, lng: props.serviceArea.location.longitude}}
                                             key={props.contractorId}
@@ -78,35 +85,36 @@ const ContractorSearch: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className="col-12 col-lg-6">
-                { /* Contractor List Items */ }
-                <div className="row pt-3">
-                    {Array.from(Object.values(contractorProps)).map((contractorProps) => {
-                        let show = false;
-                        if(location) { 
-                            const distanceMiles = getDistance(contractorProps.serviceArea.location, location) / 1609.34;
-                            if (distanceMiles < contractorProps.serviceArea.radius) {
-                                const isJobCategoryFilterEmpty = () => {
-                                    return !Object.values(jobCategoryFilter).reduce((prev, jobCategory) => jobCategory || prev, false);
-                                };
-                                if(isJobCategoryFilterEmpty()) {
-                                    show = true;
-                                } else {
-                                    contractorProps.jobCategories.forEach((jobCategory) => {
-                                        if(jobCategoryFilter[jobCategory]) {
-                                            show = true;
-                                        }
-                                    })
+            <div className="col-12 col-lg-4">
+                {
+                    selectedContractor 
+                    ?  <Contractor {...selectedContractor}/>
+                    : <>
+                        { /* Contractor List Items */ }
+                        {Array.from(Object.values(contractorProps)).map((contractorProps) => {
+                            let show = false;
+                            if(clientCoordinate) { 
+                                const distanceMiles = getDistance(contractorProps.serviceArea.location, clientCoordinate) / 1609.34;
+                                if (distanceMiles < contractorProps.serviceArea.radius) {
+                                    const isJobCategoryFilterEmpty = () => {
+                                        return !Object.values(jobCategoryFilter).reduce((prev, jobCategory) => jobCategory || prev, false);
+                                    };
+                                    if(isJobCategoryFilterEmpty()) {
+                                        show = true;
+                                    } else {
+                                        contractorProps.jobCategories.forEach((jobCategory) => {
+                                            if(jobCategoryFilter[jobCategory]) {
+                                                show = true;
+                                            }
+                                        })
+                                    }
                                 }
                             }
-                        }
-                        return show && <div key={contractorProps.contractorId}  className="col-12">
-                            <ContractorListItem {...contractorProps} />
-                        </div>;
-                    })}
-                </div>
+                            return show && <ContractorListItem key={contractorProps.contractorId} {...contractorProps} />
+                        })}
+                    </>
+                }                
             </div>
-
         </div>
     </div>
 }

@@ -15,19 +15,19 @@ export const SystemMessageSlice = createSlice({
     name: 'systemMessageQueue',
     initialState,
     reducers: {
-        startPresenting: (state, action: PayloadAction<SystemMessageProps>) => {
+        presentSystemMessage: (state, action: PayloadAction<SystemMessageProps>) => {
             if(state.presenting.find(p => messagesAreEqual(p, action.payload)) == null) {
                 state.presenting.push(action.payload);
+                setTimeout(() => {
+                    const i = state.presenting.findIndex(p => messagesAreEqual(p, action.payload));
+                    if(i > -1) {
+                        state.presenting.splice(i, 1);        
+                    }
+                }, action.payload.timeout)
             }
         },
-        stopPresenting: (state, action: PayloadAction<SystemMessageProps>) => {
-            const i = state.presenting.findIndex(p => messagesAreEqual(p, action.payload));
-            if(i > -1) {
-                state.presenting.splice(i, 1);        
-            }
-        }
     },
 })
 
-export const { startPresenting, stopPresenting } = SystemMessageSlice.actions
+export const { presentSystemMessage } = SystemMessageSlice.actions
 export default SystemMessageSlice.reducer

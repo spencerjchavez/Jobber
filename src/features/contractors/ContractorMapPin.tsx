@@ -13,9 +13,9 @@ const ContractorMapPin: React.FC<ContractorProps & ZoomProp & ContractorRatingsP
     const isLarge = props.zoom > 10;
 
     return <div className={`contractor-map-pin-wrapper ${isLarge ? "large" : "small"}`}>
-        { isLarge && <div className="text-wrapper bg-white shadow d-flex flex-column">
+        { isLarge && <div className="text-wrapper bg-white shadow d-flex flex-column align-items-start">
             <h5 className="mb-1">{props.name}</h5>
-            <ContractorRatings type={"stars-only"} contractorId={props.contractorId} ratings={props.ratings} avgStars={props.avgStars} className="pb-0" />
+            <ContractorRatings type={"stars-only"} contractorId={props.contractorId} ratings={props.ratings} avgStars={props.avgStars} />
         </div> }
         <div className="contractor-map-pin">
             <MapPin/>

@@ -1,12 +1,26 @@
 @import 'src/theme-variables';
 $img-size-lg: 60px;
 $img-size-sm: 40px;
+$text-width: 200px;
 $border-size: 3px;
 
 .contractor-map-pin-wrapper {
     position: relative;
-    display: grid;
+    display: relative;
     transition: .2s ease-out margin;
+    width: calc(.5 * $img-size-lg + $text-width);
+    height: $img-size-lg + 24px;
+
+    & > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    &.small {
+        width: $img-size-sm;
+        height: $img-size-sm + 24px;
+    }
 
     &:hover {
         margin-bottom: 1em;
@@ -14,15 +28,17 @@ $border-size: 3px;
 
     & > .text-wrapper {
         padding: 1em;
-        margin-left: calc(.5 * $img-size-lg + 1em);
-        padding-left: calc(.5 * $img-size-lg + 2em);
+        margin-left: calc(.5 * $img-size-lg);
+        padding-left: calc(.5 * $img-size-lg + 1em);
+        padding-bottom: .5em;
         margin-top: calc($border-size);
-        height: $img-size-lg;
-        display: flex;
-        align-items: center;
         text-align: left;
-        grid-row-start: 1;
-        grid-column-start: 1;
+        z-index: 0;
+        width: $text-width;
+
+        & > * {
+            word-break: break-word;
+        }
     }
 
     & > img {
@@ -31,9 +47,7 @@ $border-size: 3px;
         margin-left: $border-size;
         width: $img-size-lg;
         height: $img-size-lg;
-        grid-row-start: 1;
-        grid-column-start: 1;
-        z-index: 1
+        z-index: 2
     }
 
     &.small > img {
@@ -43,10 +57,9 @@ $border-size: 3px;
 
     & > .contractor-map-pin {
         width: calc($img-size-lg + 2 * $border-size);
-        grid-row-start: 1;
-        grid-column-start: 1;
         color: $color-secondary;
         filter: drop-shadow(0 .5rem 1rem rgba(0,0,0,.35));
+        z-index: 1
     }
 
     &.small > .contractor-map-pin {

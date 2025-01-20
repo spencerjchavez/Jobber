@@ -8,7 +8,6 @@ import { RootState } from "src/store/store";
 
 interface Props extends ContractorRatingsProps {
     type: 'stars-only' | 'condensed-vertical' | 'large';
-    className: string;
 }
 
 const ContractorRatings: React.FC<Props> = (props) => {
@@ -40,13 +39,13 @@ const getStarElements = (stars: number) => {
 }
 
 const StarsOnly: React.FC<Props> = (props) => {
-    return <div className={"d-flex justify-content-center pb-2 " + props.className}>
+    return <div className={"d-flex justify-content-center pb-2 "}>
         {getStarElements(props.avgStars)}
     </div>
 }
 
 const CondensedVertical: React.FC<Props> = (props) => {
-    return <div className={"d-flex flex-column text-center mb-3 " + props.className}>
+    return <div className={"d-flex flex-column text-center mb-3 "}>
         <div className="d-flex justify-content-center pb-2">
             {getStarElements(props.avgStars)}
         </div>
@@ -63,7 +62,7 @@ const CondensedVertical: React.FC<Props> = (props) => {
 const Large: React.FC<Props> = (props) => {
     const userProps = useSelector((state: RootState) => state.users.userProps);
 
-    return <div className={"row g-0 " + props.className}>
+    return <div className={"row g-0 "}>
         {props.ratings.map((rating, i) => {
             const user = userProps[rating.authorUserId];
             if (!user) {

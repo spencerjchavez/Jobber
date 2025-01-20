@@ -1,6 +1,6 @@
 import { useReducer, useState } from "react";
-import { startPresenting, stopPresenting } from "src/store/systemMessageQueueSlice"
-import { setLocation } from "src/store/placeSlice";
+import { presentSystemMessage } from "src/store/systemMessageQueueSlice"
+import { setCoordinate } from "src/store/placeSlice";
 import Gallery from "src/components/Gallery";
 import HoverCard from "src/components/HoverCard";
 import AutocompleteInput from "../locations/AutocompleteInput";
@@ -17,7 +17,6 @@ import image9 from 'src/assets/images/compressed/9.jpg';
 import image10 from 'src/assets/images/compressed/10.jpg';
 import image11 from 'src/assets/images/compressed/11.jpg';
 import { useDispatch } from "react-redux";
-import SystemMessageProps from "../system-message-queue/SystemMessageProps";
 import { useCookies } from "react-cookie";
 
 
@@ -43,17 +42,15 @@ const WelcomePage = () => {
         navigator.geolocation.getCurrentPosition((position) => {
             const { latitude, longitude } = position.coords;
             const location = {latitude, longitude};
-            dispatch(setLocation(location));
+            dispatch(setCoordinate(location));
             setLocationCookie('location', location, )
         }, () => {
-            const systemMessage: SystemMessageProps = {
+            dispatch(presentSystemMessage({
                 level: 'error',
-                message: 'Current location unavailable. Please enter a location instead.'
-            };
-            dispatch(startPresenting(systemMessage));
-            setTimeout(() => {
-                dispatch(stopPresenting(systemMessage));
-            }, 10000)
+                message: 'Current location unavailable. Please enter a location instead.',
+                timeout: 10000,
+            }));
+            
         });
     }
 

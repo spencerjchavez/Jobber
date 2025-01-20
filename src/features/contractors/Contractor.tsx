@@ -6,18 +6,19 @@ import MainContainer from "../../components/MainContainer";
 import ContractorRatings from "../ratings/ContractorRatings";
 import Gallery from "src/components/Gallery";
 import Form from "../forms/Form";
+import ContractorProps from "src/global-types/ContractorProps";
 
-const Contractor: React.FC = () => {
-    const params = useParams();
+const Contractor: React.FC<ContractorProps> = (props) => {
+/*    const params = useParams();
     const { contractorId } = params;
-    const contractorIdNumber = +(contractorId ?? '-1');
+    const contractorIdNumber = +(contractorId ?? '-1'); 
 
     const contractorProps = useSelector((state: RootState) => state.contractors.contractorProps);
-    const props = contractorProps[contractorIdNumber];
+    const props = contractorProps[contractorIdNumber]; */
     if (props == null) {
         return <ErrorPage />
     } else {
-        const contractorRatings = useSelector((state: RootState) => state.contractors.contractorRatings[contractorIdNumber]);
+        const contractorRatings = useSelector((state: RootState) => state.contractors.contractorRatings[props.contractorId] ?? []);
         return <div className="section">
             <MainContainer
                 sidebarLeft={<>

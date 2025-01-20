@@ -7,10 +7,10 @@ interface MainContainerProps {
 
 const MainContainer: React.FC<MainContainerProps> = ({sidebarLeft, mainContent }) => {
     return <div className="row">
-        <div className="col-lg-3 col-12 sticky-lg p-3 p-lg-5">
+        <div className="col-12 col-lg-3 p-3 p-lg-5"> 
             {sidebarLeft}
         </div>
-        <div className="col-lg-9 col-12 p-3 p-lg-5">
+        <div className="col-12 col-lg-9 p-3 p-lg-5"> 
             {mainContent}
         </div>
     </div>
