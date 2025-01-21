@@ -2,56 +2,56 @@ import simpleContactFormProps from "src/features/forms/SimpleContactForm"
 import ContractorProps from "src/global-types/ContractorProps"
 
 interface JobCategoryDto {
-    Id: string,
-    Name: string,
+    id: string,
+    name: string,
 }
 
 interface ServiceAreaDto {
-    Latitude: number,
-    Longitude: number,
-    Radius: number,
+    latitude: number,
+    longitude: number,
+    radius: number,
 }
 
 interface ImageDto {
-    ImageThumbnail: string,
-    Image: string,
+    imageThumbnail: string,
+    image: string,
 }
 
 interface ContractorDto {
-    Id: number,
-    Guid: string,
-    FirstName: string,
-    LastName: string,
-    BioShort?: string,
-    BioLong?: string,
-    JobCategories?: JobCategoryDto[],
-    Services?: string[],
-    ServiceArea?: ServiceAreaDto,
-    ProfilePicture?: ImageDto,
-    Portfolio?: ImageDto[],
+    id: number,
+    guid: string,
+    firstName: string,
+    lastName: string,
+    bioShort?: string,
+    bioLong?: string,
+    jobCategories?: JobCategoryDto[],
+    services?: string[],
+    serviceArea?: ServiceAreaDto,
+    profilePicture?: ImageDto,
+    portfolio?: ImageDto[],
 }
 
 const ContractorDtoToContractorProps: (dto: ContractorDto) => ContractorProps = (dto) => {
     return {
-        name: dto.FirstName + ' ' + dto.LastName,
-        specialty: dto.BioShort ?? '',
+        name: dto.firstName + ' ' + dto.lastName,
+        specialty: dto.bioShort ?? '',
         jobCategories: [],
         serviceArea: {
             location: {
-                latitude: dto.ServiceArea!.Latitude,
-                longitude: dto.ServiceArea!.Longitude,
+                latitude: dto.serviceArea!.latitude,
+                longitude: dto.serviceArea!.longitude,
             },
-            radius: dto.ServiceArea!.Radius,
+            radius: dto.serviceArea!.radius,
         },
-        contractorId: dto.Guid,
-        profilePicture: dto.ProfilePicture ? {
-            image: dto.ProfilePicture.Image,
-            imageThumbnail: dto.ProfilePicture.ImageThumbnail,
+        contractorId: dto.guid,
+        profilePicture: dto.profilePicture ? {
+            image: dto.profilePicture.image,
+            imageThumbnail: dto.profilePicture.imageThumbnail,
         } : undefined,
-        portfolioImages: dto.Portfolio?.map((image) => {
+        portfolioImages: dto.portfolio?.map((image) => {
             return {
-                image: image.Image,
-                imageThumbnail: image.ImageThumbnail,
+                image: image.image,
+                imageThumbnail: image.imageThumbnail,
             }
         }) ?? [],
         services: [],

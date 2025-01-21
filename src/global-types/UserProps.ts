@@ -1,6 +1,6 @@
 export default interface UserProps {
-    userId: number
+    userId: string
     name: string
     profilePicture: string
-    contractorId?: number
+    contractorId?: string
 }

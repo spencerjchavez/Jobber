@@ -4,11 +4,13 @@ import contractorReducer from './contractorsSlice';
 import usersReducer from './usersSlice';
 import placeReducer from './placeSlice';
 import systemMessageQueueReducer from './systemMessageQueueSlice';
+import contractorSearchMapReducer from './contractorSearchMapSlice';
 
 export const store = configureStore({
   reducer: combineReducers({
     jobPosts: jobPostsReducer,
     contractors: contractorReducer,
+    contractorSearchMap: contractorSearchMapReducer,
     users: usersReducer,
     place: placeReducer,
     systemMessageQueue: systemMessageQueueReducer,

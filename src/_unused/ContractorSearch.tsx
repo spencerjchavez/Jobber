@@ -1,3 +1,4 @@
+/*
 import './ContractorSearch.scss';
 import { useDispatch, useSelector } from "react-redux";
 import MainContainer from "src/components/MainContainer";
@@ -51,3 +52,4 @@ const ContractorSearch: React.FC = () => {
 }
 
 export default ContractorSearch;
+*/

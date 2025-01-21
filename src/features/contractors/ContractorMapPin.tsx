@@ -20,7 +20,7 @@ const ContractorMapPin: React.FC<ContractorProps & ZoomProp & ContractorRatingsP
         <div className="contractor-map-pin">
             <MapPin/>
         </div>
-        <img src={props.profilePicture} className="mb-0 rounded-circle"/>
+        <img src={props.profilePicture?.image} className="mb-0 rounded-circle"/>
     </div>
 }
 

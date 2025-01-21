@@ -3,13 +3,13 @@ import UserProps from "src/global-types/UserProps";
 
 // Define a type for the slice state
 export interface UsersState {
-    userProps: { [userId: number]: UserProps };
+    userProps: { [userId: string]: UserProps };
 }
 
 // Define the initial state
-const initialUserProps: { [userId: number]: UserProps} = {
-    1: {
-        userId: 1,
+const initialUserProps: { [userId: string]: UserProps} = {
+    '1': {
+        userId: '1',
         name: 'Karen',
         profilePicture: 'https://qph.cf2.quoracdn.net/main-qimg-6f8532751ceb198802a5a438cb5c634e-lq'
     }

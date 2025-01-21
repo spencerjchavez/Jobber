@@ -10,7 +10,7 @@ const ContractorListItem : React.FC<ContractorProps> = (props) => {
     return <div className="row contractor-list-item p-3">
         <Link to={`/contractor/${props.contractorId}`} className="fill" />
         <div className="col-4 col-lg-4 text-center">
-            <img className="img-fluid rounded-circle mb-1" src={props.profilePicture}/>
+            <img className="img-fluid rounded-circle mb-1" src={props.profilePicture?.image}/>
             { contractorRatings && <ContractorRatings type='condensed-vertical' {...contractorRatings}/> }
         </div>
         <div className="col-8 col-lg-8">
